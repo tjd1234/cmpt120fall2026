@@ -14,10 +14,10 @@ easy to read on the web in a couple of ways:
 2. **Using the [Jupyter notebook viewer](https://nbviewer.jupyter.org/).** Paste
   the github link into the viewer.
 3. **Use [Google Colab][https://colab.research.google.com/].** You will need a
-  (free) Google account to use it. With [Google Colab][https://colab.research.google.com/] you can open notebooks
-  interactively in your web browser (and run cells online), save and edit
-  copies, and also get pretty much all Python libraries you are likely to ever
-  need.
+  (free) Google account to use it. With [Google Colab][https://colab.research.google.com/] 
+  you can open notebooks interactively in your web browser (and run cells
+  online), save and edit copies, and also get pretty much all Python libraries
+  you are likely to ever need.
 
 ### Week 1 (Sept 7 to Sept 11)
 
@@ -64,26 +64,20 @@ presentation.
 
 ### Week 8 (Oct 26 to Oct 30)
 
-- Midterm exam! See Canvas for details.
-- Review these lecture notes: [chapter 8 lecture notes](lecture_notes/chapter8/chapter8_lecture.ipynb)
-
-### Week 9 (Nov 2 to Nov 6)
-
 - Read this textbook chapter: [chapter 8](textbook/chap08.ipynb)
 - Review these lecture notes: [chapter 8 lecture notes](lecture_notes/chapter8/chapter8_lecture.ipynb); [practice problems](lecture_notes/chapter8/chapter8_practice.ipynb) ([solutions](lecture_notes/chapter8/chapter8_practice_sol.ipynb)); 
 [ROT13 example](lecture_notes/chapter8/rot13.ipynb)
 - Do this homework: [chapter 8 homework](lecture_notes/chapter8/homework8.ipynb) ([solutions](lecture_notes/chapter8/homework8_sol.ipynb))
 - Extra practice problems: [string function practice](exams/string_functions/string_fns.ipynb) ([solutions](exams/string_functions/string_fns_sol.ipynb))
 
-### Week 10 (Nov 9 to Nov 13)
-
+### Week 9 (Nov 2 to Nov 6)
 
 - Read this textbook chapter: [chapter 9](textbook/chap09.ipynb)
 - Review these lecture notes: [chapter 9 lecture notes](lecture_notes/chapter9/chapter9_lecture.ipynb)
 - Do this homework: [chapter 9 homework](lecture_notes/chapter9/homework9.ipynb) ([solutions](lecture_notes/chapter9/homework9_sol.ipynb))
 - Extra practice problems: [list problems](lecture_notes/chapter9/chapter9_practice.ipynb) ([solutions](lecture_notes/chapter9/chapter9_practice_sol.ipynb))
 
-### Week 11 (Nov 16 to Nov 20)
+### Week 10 (Nov 9 to Nov 13)
 
 - Read this textbook chapter: [chapter 10](textbook/chap10.ipynb)
 - Review these lecture notes: [chapter 10 lecture notes](lecture_notes/chapter10/chapter10_lecture.ipynb)
@@ -94,7 +88,7 @@ presentation.
   - [counting votes](lecture_notes/chapter10/counting_votes_start.py) ([solutions](lecture_notes/chapter10/counting_votes_sol.py))
 - Do this homework: [chapter 10 homework](lecture_notes/chapter10/homework10.ipynb) ([solutions](lecture_notes/chapter10/homework10_sol.ipynb))
 
-### Week 12 (Nov 23 to Nov 27)
+### Week 11 (Nov 16 to Nov 20)
 
 - Read this textbook chapter: **none**
 - Review these lecture notes: [linear search](lecture_notes/chapter_algorithms/alg1_linear_search/alg1_linear_search.ipynb), [binary search](lecture_notes/chapter_algorithms/alg2_binary_search/alg2_binary_search.ipynb)
@@ -106,12 +100,23 @@ presentation.
   - [linear search homework](lecture_notes/chapter_algorithms/alg1_linear_search/alg1_linear_search_homework.ipynb) ([solutions](lecture_notes/chapter_algorithms/alg1_linear_search/alg1_linear_search_homework_sol.ipynb))
   - [binary search homework](lecture_notes/chapter_algorithms/alg2_binary_search/alg2_binary_search_homework.ipynb) ([solutions](lecture_notes/chapter_algorithms/alg2_binary_search/alg2_binary_search_homework_sol.ipynb))
 
-### Week 13 (Nov 30 to Dec 4)
+### Week 12 (Nov 23 to Nov 27)
 
 - Read this textbook chapter: **none**
 - Review these lecture notes: [sorting](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting.ipynb)
 - Do this homework: [sorting homework](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting_homework.ipynb) ([solutions](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting_homework_sol.ipynb))
 - Practice problems: [selection sort](lecture_notes/chapter_algorithms/alg3_sorting/selection_sort_start.py) ([solutions](lecture_notes/chapter_algorithms/alg3_sorting/selection_sort_sol.py))
+
+### Week 13 (Nov 30 to Dec 4
+
+- slack time
+
+- possible topics (if time permits):
+  - list comprehensions
+  - optional types
+  - the match statement
+  - AI agents for programming
+
 
 ### Week 14 (Dec 7)
 
