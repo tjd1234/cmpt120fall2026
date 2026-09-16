@@ -23,13 +23,13 @@ easy to read on the web in a couple of ways:
 
 - Read this textbook chapter: [chapter 0](textbook/chap00.ipynb)
 - Introductory slides: [introduction 1 (admin)](lecture_notes/introduction/introduction1.pptx), [introduction 2 (history etc.)](lecture_notes/introduction/introduction2.pptx), [introduction 3 (using Python)](lecture_notes/introduction/introduction3.pptx)
-- Sample code: [tshirt module](code/tshirt.py), [demo](code/tshirt_demo.py)
 
 ### Week 2 (Sept 14 to Sept 18)
 
 - Read this textbook chapter: [chapter 1](textbook/chap01.ipynb)
 - Review these lecture notes: [chapter 1 lecture notes](lecture_notes/chapter1/chapter1_lecture.ipynb)
 - Do this homework: [chapter 1 homework](lecture_notes/chapter1/homework1.ipynb) ([solutions](lecture_notes/chapter1/homework1_sol.ipynb))
+- Sample code: [tshirt module](code/tshirt.py), [demo](code/tshirt_demo.py)
 
 ### Week 3 (Sept 21 to Sept 25)
 

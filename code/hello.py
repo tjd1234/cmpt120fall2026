@@ -1,4 +1,4 @@
-# sample program
+ # sample program
 
-print('Hello!')
-print('Welcome to Python!')
+print('      Hello!')  # prints Hello! on the screen
+print('Welcome!')
