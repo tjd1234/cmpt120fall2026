@@ -31,13 +31,14 @@ easy to read on the web in a couple of ways:
   - [Lecture 4 examples](lecture_notes/chapter1/lecture4/)
   - [Lecture 5 examples](lecture_notes/chapter1/lecture5/)
 - Do this homework: [chapter 1 homework](lecture_notes/chapter1/homework1.ipynb) ([solutions](lecture_notes/chapter1/homework1_sol.ipynb))
-- Sample code: [tshirt module](code/tshirt.py), [demo](code/tshirt_demo.py)
 
 ### Week 3 (Sept 21 to Sept 25)
 
 - Read this textbook chapter: [chapter 2](textbook/chap02.ipynb)
 - Review these lecture notes: [chapter 2 lecture notes](lecture_notes/chapter2/chapter2_lecture.ipynb)
   - [trig_helper.py](lecture_notes/chapter2/trig_helper.py) example program
+  - [tshirt module](code/tshirt.py), [demo](code/tshirt_demo.py)
+
 - Do this homework: [chapter 2 homework](lecture_notes/chapter2/homework2.ipynb) ([solutions](lecture_notes/chapter2/homework2_sol.ipynb))
 
 ### Week 4 (Sept 28 to Oct 2)
