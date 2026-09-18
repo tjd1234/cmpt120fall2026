@@ -27,7 +27,9 @@ easy to read on the web in a couple of ways:
 ### Week 2 (Sept 14 to Sept 18)
 
 - Read this textbook chapter: [chapter 1](textbook/chap01.ipynb)
-- Review these lecture notes: [chapter 1 lecture notes](lecture_notes/chapter1/chapter1_lecture.ipynb); [class 4 lecture examples](lecture_notes/chapter1/lecture4notes.html) ([view online](https://htmlpreview.github.io/?https://raw.githubusercontent.com/tjd1234/cmpt120fall2026/main/lecture_notes/chapter1/lecture4notes.html))
+- Review these lecture notes: [chapter 1 lecture notes](lecture_notes/chapter1/chapter1_lecture.ipynb)
+  - [Lecture 4 examples](lecture_notes/chapter1/lecture4/)
+  - [Lecture 5 examples](lecture_notes/chapter1/lecture5/)
 - Do this homework: [chapter 1 homework](lecture_notes/chapter1/homework1.ipynb) ([solutions](lecture_notes/chapter1/homework1_sol.ipynb))
 - Sample code: [tshirt module](code/tshirt.py), [demo](code/tshirt_demo.py)
 
