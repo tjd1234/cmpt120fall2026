@@ -27,7 +27,7 @@ easy to read on the web in a couple of ways:
 ### Week 2 (Sept 14 to Sept 18)
 
 - Read this textbook chapter: [chapter 1](textbook/chap01.ipynb)
-- Review these lecture notes: [chapter 1 lecture notes](lecture_notes/chapter1/chapter1_lecture.ipynb)
+- Review these lecture notes: [chapter 1 lecture notes](lecture_notes/chapter1/chapter1_lecture.ipynb); [class 4 lecture examples](lecture_notes/chapter1/lecture4notes.html)
 - Do this homework: [chapter 1 homework](lecture_notes/chapter1/homework1.ipynb) ([solutions](lecture_notes/chapter1/homework1_sol.ipynb))
 - Sample code: [tshirt module](code/tshirt.py), [demo](code/tshirt_demo.py)
 
