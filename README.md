@@ -36,8 +36,9 @@ easy to read on the web in a couple of ways:
 
 - Read this textbook chapter: [chapter 2](textbook/chap02.ipynb)
 - Review these lecture notes: [chapter 2 lecture notes](lecture_notes/chapter2/chapter2_lecture.ipynb)
-  - [trig_helper.py](lecture_notes/chapter2/trig_helper.py) example program
+  - [lecture 6 examples](lecture_notes/chapter2/lecture6/)
   - [tshirt module](code/tshirt.py), [demo](code/tshirt_demo.py)
+  - [trig_helper.py](lecture_notes/chapter2/trig_helper.py) example program
 
 - Do this homework: [chapter 2 homework](lecture_notes/chapter2/homework2.ipynb) ([solutions](lecture_notes/chapter2/homework2_sol.ipynb))
 
