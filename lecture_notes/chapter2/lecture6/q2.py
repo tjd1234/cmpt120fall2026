@@ -1,4 +1,4 @@
-# q2_sol.py
+# q2.py
 
 """
 Write a program that reads in the lengths of the two legs of a right triangle (a
@@ -22,3 +22,13 @@ What ib b? 6
 The hypotenuse c is 6.946221994724902
 ```
 """
+import math
+
+a = float(input('What is a? '))
+b = float(input('What is b? '))
+
+c = math.sqrt(a**2 + b**2)
+
+print(f'The hypotenuse of c is {c:.1f}')
+
+

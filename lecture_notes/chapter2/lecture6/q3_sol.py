@@ -1,4 +1,4 @@
-# q3_sol.py
+# q3.py
 
 """
 Write a program that asks the user how many sides they would like their die to

@@ -1,4 +1,4 @@
-# q3_sol.py
+# q3.py
 
 """
 Write a program that asks the user how many sides they would like their die to
@@ -13,3 +13,15 @@ Rolling a 6-sided die three times ...
 ```
 
 """
+import random
+
+sides = int(input('How many sides? '))
+
+print(f'Rolling a {sides}-sided die three times ...')
+roll1 = random.randint(1, sides)
+roll2 = random.randint(1, sides)
+roll3 = random.randint(1, sides)
+
+print('1st roll:', roll1)
+print('2nd roll:', roll2)
+print('3rd roll:', roll3)
