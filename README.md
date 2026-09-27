@@ -47,6 +47,7 @@ easy to read on the web in a couple of ways:
 
 - Read this textbook chapter: [chapter 3](textbook/chap03.ipynb)
 - Review these lecture notes: [chapter 3 lecture notes](lecture_notes/chapter3/chapter3_lecture.ipynb)
+  - [lecture 8 examples](lecture_notes/chapter3/lecture8/)
 - Do this homework: [chapter 3 homework](lecture_notes/chapter3/homework3.ipynb) ([solutions](lecture_notes/chapter3/homework3_sol.ipynb))
 
 ### Week 5 (Oct 5 to Oct 9)

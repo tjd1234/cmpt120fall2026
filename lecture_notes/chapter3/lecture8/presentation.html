@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Practice Questions</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --panel: #ffffff;
+    --text: #1a1a1a;
+    --accent: #2563eb;
+    --accent-dark: #1d4ed8;
+    --done: #16a34a;
+    --border: #d8dce3;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+  }
+  header h1 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+  .question-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .q-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    background: var(--panel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .q-btn:hover { border-color: var(--accent); }
+  .q-btn.active { border-color: var(--accent); background: #eaf1ff; }
+  .q-btn.done { border-color: var(--done); }
+  .q-btn .check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: transparent;
+    flex-shrink: 0;
+  }
+  .q-btn.done .check {
+    background: var(--done);
+    border-color: var(--done);
+    color: white;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 30px 60px;
+  }
+  .stage {
+    max-width: 1000px;
+    width: 100%;
+  }
+  .placeholder {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #888;
+    margin-top: 80px;
+  }
+  .question-block {
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: left;
+  }
+  .question-block p { margin: 0 0 0.7em; }
+  .question-block ul { margin: 0.5em 0 0.9em 1.4em; }
+  .question-block li { margin-bottom: 0.3em; }
+  .question-block pre {
+    background: #1e1e2e;
+    color: #f5f5f5;
+    padding: 18px 22px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+  .question-block code {
+    background: #e8eaf0;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    font-weight: 400;
+  }
+  .question-block pre code { background: none; padding: 0; }
+  .controls {
+    display: flex;
+    gap: 14px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+  }
+  button.action {
+    font-size: 1.15rem;
+    padding: 14px 26px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .btn-answer {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-answer:hover { background: var(--accent-dark); }
+  .btn-answer.showing { background: #4b5563; }
+  .btn-done {
+    background: var(--panel);
+    border: 2px solid var(--done);
+    color: var(--done);
+  }
+  .btn-done.active {
+    background: var(--done);
+    color: white;
+  }
+  .answer-panel {
+    display: none;
+    margin-top: 10px;
+    padding: 26px 30px;
+    background: #fffbe6;
+    border: 2px solid #f2d675;
+    border-radius: 12px;
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+  .answer-panel.visible { display: block; }
+  .answer-panel h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #92700f;
+  }
+  .answer-panel pre {
+    background: #1e1e2e;
+    color: #f5f5f5;
+    padding: 16px 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: 1.15rem;
+  }
+  .answer-panel code {
+    background: #eee0b0;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+  .answer-panel pre code { background: none; padding: 0; }
+  .no-answer {
+    font-style: italic;
+    color: #888;
+  }
+  .file-tag {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: -18px;
+    margin-bottom: 20px;
+  }
+  sup, sub { font-size: 0.7em; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Practice Questions</h1>
+  <div class="question-nav" id="questionNav"></div>
+</header>
+<main>
+  <div class="stage" id="stage">
+    <div class="placeholder">Select a question above to display it.</div>
+  </div>
+</main>
+
+<!--
+  ============================================================================
+  QUESTION DATA -- GENERATED, DO NOT EDIT BY HAND
+  ============================================================================
+  This file was generated by generate_presentation.py from the qN.md files
+  in this folder (q1.md, q2.md, q3.md, ...). Each question's markdown is
+  embedded below in a <script type="text/plain"> block, which the browser
+  never runs or displays -- it's just a plain-text container.
+
+  To change a question: edit its qN.md file, then re-run
+      python3 generate_presentation.py
+  to regenerate this HTML file.
+
+  To add a question: add a new qN.md file (q5.md, q6.md, ...) with a
+  "## Question" section and an optional "## Sample Solution" section,
+  then re-run the script.
+
+  To remove a question: delete its qN.md file and re-run the script.
+
+  Do not use the literal text "</script>" inside a question's markdown --
+  that's the only thing that would break it.
+  ============================================================================
+-->
+
+<script type="text/plain" class="qfile" data-id="q1" data-file="q1_sol.py" data-label="Q1">
+## Question
+
+Make a Python version of the math function f(x) = 2x + 1. Use it print the
+values f(2), f(5), and f(1000). Then ask the user to enter a number and print
+the value of f(x) as shown.
+
+```
+5
+11
+2001
+Enter a number: 2.6
+f(2.6) = 6.2
+```
+
+## Sample Solution
+
+```python
+def f(x):
+    return 2 * x + 1
+
+print(f(2))
+print(f(5))
+print(f(1000))
+
+x = float(input("Enter a number: "))
+print(f'f({x}) = {f(x)}')
+```
+</script>
+
+<script type="text/plain" class="qfile" data-id="q2" data-file="q2_sol.py" data-label="Q2">
+## Question
+
+Write a function that takes a person's name as input, and returns a string of
+the form 'Hello, <name>!'. Then ask the user to enter the names of two people,
+and print the result of calling the function for each person.
+```
+Person 1: Audrey
+Person 2: Ali
+
+Hello, Audrey!
+Hello, Ali!
+```
+
+## Sample Solution
+
+```python
+def make_greeting(name):
+    return f'Hello, {name}!'
+
+name1 = input("Person 1: ")
+name2 = input("Person 2: ")
+print()
+print(make_greeting(name1))
+print(make_greeting(name2))
+```
+</script>
+
+<script type="text/plain" class="qfile" data-id="q3" data-file="q3_sol.py" data-label="Q3">
+## Question
+
+Write a function called print_in_bars(word) that prints word surrounded by |
+characters as shown. This function only prints, and so has no return. Then ask
+the user to enter their three favourite foods, and use print_in_bars to print
+each food. 
+
+```
+Food 1: peaches
+Food 2: sushi
+Food 3: ice cream
+
+|peaches|
+|sushi|
+|ice cream|
+```
+
+## Sample Solution
+
+```python
+def print_in_bars(word):    
+    print(f'|{word}|')
+
+food1 = input("Food 1: ")
+food2 = input("Food 2: ")
+food3 = input("Food 3: ")
+print()
+print_in_bars(food1)
+print_in_bars(food2)
+print_in_bars(food3)
+```
+</script>
+
+<script type="text/plain" class="qfile" data-id="q4" data-file="q4_sol.py" data-label="Q4">
+## Question
+
+Write a function called print_in_box(word) that prints word in a box as shown.
+Use the print_in_bars function from the previous question to print the middle
+line of the box. Then ask the user to enter a movie name and print in a box.
+
+```
+Enter a movie name: The Matrix
++----------+
+|The Matrix|
++----------+
+```
+
+## Sample Solution
+
+```python
+def print_in_bars(word):    
+    print(f'|{word}|')
+
+def print_in_box(word):
+    bar = '+' + '-' * len(word) + '+'
+    print(bar)
+    print_in_bars(word)
+    print(bar)
+
+
+movie = input("Enter a movie name: ")
+print_in_box(movie)
+```
+</script>
+
+<script type="text/plain" class="qfile" data-id="q5" data-file="q5_sol.py" data-label="Q5">
+## Question
+
+Write a program that asks the user to enter an int that is 0 or greater, and a
+word, and then prints the word in a numbered list as shown. Use a for-loop in
+your solution. No functions are required, but you can make one if you want.
+
+```
+Enter an int: 3
+Enter a word: hello!
+hello!
+hello!
+hello!
+```
+
+## Sample Solution
+
+```python
+n = int(input("Enter an int: "))
+word = input("Enter a word: ")
+print()
+for i in range(n):
+    print(f'{i+1}. {word}')
+```
+</script>
+
+<script type="text/plain" class="qfile" data-id="q6" data-file="q6_sol.py" data-label="Q6">
+## Question
+
+Write a program that asks the user to enter an int (called n)that is 0 or
+greater. Then, starting at 1, print the ints from 1 to n on the screen in a box
+as shown. Use the print_in_box(word) function from the previous question.
+
+```
+Enter an int: 3
+
++-+
+|1|
++-+
+
++-+
+|2|
++-+
+
++-+
+|3|
++-+
+```
+
+## Sample Solution
+
+```python
+def print_in_bars(word):    
+    print(f'|{word}|')
+
+def print_in_box(word):
+    bar = '+' + '-' * len(word) + '+'
+    print(bar)
+    print_in_bars(word)
+    print(bar)
+
+n = int(input("Enter an int: "))
+print()
+for i in range(1, n+1):
+    print_in_box(str(i))
+    print()
+```
+</script>
+
+<script>
+function splitSections(text) {
+  text = (text || '').replace(/\r\n/g, '\n');
+  const qMatch = text.match(/##\s*Question\s*\n([\s\S]*?)(?=\n##\s*Sample Solution|$)/);
+  const sMatch = text.match(/##\s*Sample Solution\s*\n([\s\S]*)/);
+  const question = qMatch ? qMatch[1].trim() : text.trim();
+  const solution = sMatch ? sMatch[1].trim() : '';
+  return { question: question, solution: solution };
+}
+
+function loadQuestionsFromPage() {
+  const blocks = document.querySelectorAll('script.qfile');
+  const loaded = [];
+  blocks.forEach(function(block) {
+    const sections = splitSections(block.textContent);
+    loaded.push({
+      id: block.dataset.id,
+      file: block.dataset.file,
+      label: block.dataset.label,
+      question: sections.question,
+      solution: sections.solution
+    });
+  });
+  return loaded;
+}
+
+const QUESTIONS = loadQuestionsFromPage();
+
+const DONE_KEY = 'presentationAI_done_presentation';
+function loadDone() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(DONE_KEY) || '[]'));
+  } catch (e) {
+    return new Set();
+  }
+}
+function saveDone(set) {
+  try {
+    localStorage.setItem(DONE_KEY, JSON.stringify(Array.from(set)));
+  } catch (e) {}
+}
+let doneSet = loadDone();
+let currentId = null;
+let answerShown = false;
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function renderInlineMarkup(text) {
+  text = text.replace(/\$([^$]+)\$/g, function(_, inner) {
+    let out = inner;
+    out = out.replace(/\^\{([^}]+)\}/g, '<sup>$1</sup>');
+    out = out.replace(/\^([A-Za-z0-9])/g, '<sup>$1</sup>');
+    out = out.replace(/_\{([^}]+)\}/g, '<sub>$1</sub>');
+    out = out.replace(/_([A-Za-z0-9])/g, '<sub>$1</sub>');
+    return out;
+  });
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  return text;
+}
+
+function renderMarkdownLite(md) {
+  md = (md || '').replace(/\r\n/g, '\n').trim();
+  if (!md) return '';
+  const fenceRegex = /```([a-zA-Z0-9]*)\n([\s\S]*?)```/g;
+  const codeBlocks = [];
+  const placeholderText = md.replace(fenceRegex, function(_, lang, code) {
+    const idx = codeBlocks.length;
+    codeBlocks.push(escapeHtml(code.replace(/\n$/, '')));
+    return '@@CODEBLOCK' + idx + '@@';
+  });
+  const blocks = placeholderText.split(/\n\s*\n/);
+  let html = '';
+  for (const block of blocks) {
+    const trimmed = block.trim();
+    if (!trimmed) continue;
+    const codeMatch = trimmed.match(/^@@CODEBLOCK(\d+)@@$/);
+    if (codeMatch) {
+      html += '<pre><code>' + codeBlocks[parseInt(codeMatch[1], 10)] + '</code></pre>';
+      continue;
+    }
+    const lines = trimmed.split('\n');
+    if (lines.every(function(l) { return /^\s*-\s+/.test(l); })) {
+      html += '<ul>' + lines.map(function(l) {
+        return '<li>' + renderInlineMarkup(escapeHtml(l.replace(/^\s*-\s+/, ''))) + '</li>';
+      }).join('') + '</ul>';
+    } else {
+      const joined = trimmed.replace(/\n/g, ' ');
+      html += '<p>' + renderInlineMarkup(escapeHtml(joined)) + '</p>';
+    }
+  }
+  return html;
+}
+
+function buildNav() {
+  const nav = document.getElementById('questionNav');
+  nav.innerHTML = '';
+  QUESTIONS.forEach(function(q) {
+    const btn = document.createElement('button');
+    btn.className = 'q-btn' + (doneSet.has(q.id) ? ' done' : '') + (q.id === currentId ? ' active' : '');
+    btn.type = 'button';
+    const check = document.createElement('span');
+    check.className = 'check';
+    check.textContent = '✓';
+    check.title = 'Toggle done';
+    check.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleDone(q.id);
+    });
+    const label = document.createElement('span');
+    label.textContent = q.label;
+    btn.appendChild(check);
+    btn.appendChild(label);
+    btn.addEventListener('click', function() {
+      showQuestion(q.id);
+    });
+    nav.appendChild(btn);
+  });
+}
+
+function toggleDone(id) {
+  if (doneSet.has(id)) {
+    doneSet.delete(id);
+  } else {
+    doneSet.add(id);
+  }
+  saveDone(doneSet);
+  buildNav();
+  if (id === currentId) renderStage();
+}
+
+function showQuestion(id) {
+  currentId = id;
+  answerShown = false;
+  buildNav();
+  renderStage();
+}
+
+function renderStage() {
+  const stage = document.getElementById('stage');
+  const q = QUESTIONS.find(function(x) { return x.id === currentId; });
+  if (!q) {
+    stage.innerHTML = '<div class="placeholder">Select a question above to display it.</div>';
+    return;
+  }
+  const isDone = doneSet.has(q.id);
+  const hasSolution = q.solution && q.solution.trim().length > 0;
+  let html = '';
+  html += '<div class="file-tag">' + q.file + '</div>';
+  html += '<div class="question-block">' + renderMarkdownLite(q.question) + '</div>';
+  html += '<div class="controls">';
+  html += '<button type="button" class="action btn-answer' + (answerShown ? ' showing' : '') + '" id="answerToggle">' + (answerShown ? 'Hide Answer' : 'Show Answer') + '</button>';
+  html += '<button type="button" class="action btn-done' + (isDone ? ' active' : '') + '" id="doneToggle">' + (isDone ? '✓ Marked Done' : 'Mark as Done') + '</button>';
+  html += '</div>';
+  html += '<div class="answer-panel' + (answerShown ? ' visible' : '') + '" id="answerPanel">';
+  html += '<h2>Sample Solution</h2>';
+  html += hasSolution ? renderMarkdownLite(q.solution) : '<p class="no-answer">No sample solution provided for this question.</p>';
+  html += '</div>';
+  stage.innerHTML = html;
+
+  document.getElementById('answerToggle').addEventListener('click', function() {
+    answerShown = !answerShown;
+    renderStage();
+  });
+  document.getElementById('doneToggle').addEventListener('click', function() {
+    toggleDone(q.id);
+  });
+}
+
+if (QUESTIONS.length === 0) {
+  document.getElementById('stage').innerHTML = '<div class="placeholder">No question blocks found in this page.</div>';
+} else {
+  buildNav();
+  renderStage();
+}
+</script>
+</body>
+</html>
