@@ -37,8 +37,8 @@ For each qN_sol.py it also writes a companion qN.py stub file: the same
 leading comments and docstring (i.e. the question), but with the solution
 code removed -- handy for handing out to students. It also writes a
 README.md in the same folder, titled "<folder name> Questions and Answers",
-with a link to the generated HTML presentation and a list linking to each
-qN.py stub and, in brackets, its qN_sol.py solution file.
+with a list linking to each qN.py stub and, in brackets, its qN_sol.py
+solution file.
 
 To make a new presentation:
     1. Write q1_sol.py, q2_sol.py, q3_sol.py, ... in a folder, each with a
@@ -56,7 +56,6 @@ re-running this script overwrites them, so don't hand-edit them.
 import argparse
 import ast
 import html
-import os
 import re
 import sys
 from pathlib import Path
@@ -167,18 +166,9 @@ def write_stub_files(parsed, directory: Path):
     return written
 
 
-def write_readme(parsed, directory: Path, output_path: Path):
-    """Write README.md with a link to the presentation, plus a list linking
-    each qN.py to its qN_sol.py."""
-    # link to the presentation relative to the README, so it works wherever
-    # the folder is copied (as_posix() keeps forward slashes for Markdown)
-    presentation_link = Path(os.path.relpath(output_path, directory)).as_posix()
-    lines = [
-        f"# {directory.name} Questions and Answers",
-        "",
-        f"Click through the questions and answers: [{presentation_link}]({presentation_link})",
-        "",
-    ]
+def write_readme(parsed, directory: Path):
+    """Write README.md with a list linking each qN.py to its qN_sol.py."""
+    lines = [f"# {directory.name} Questions and Answers", ""]
     for number, sol_path, _header_source, _question_md, _solution_code in parsed:
         stub_name = f"q{number}.py"
         sol_name = sol_path.name
@@ -257,7 +247,7 @@ def main():
     output_path.write_text(page, encoding='utf-8')
 
     stub_paths = write_stub_files(parsed, directory)
-    readme_path = write_readme(parsed, directory, output_path)
+    readme_path = write_readme(parsed, directory)
 
     names = ', '.join(p.name for _, p in question_files)
     print(f"Wrote {output_path} from {len(question_files)} question file(s): {names}")
