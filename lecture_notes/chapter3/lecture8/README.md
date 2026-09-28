@@ -6,3 +6,5 @@
 - [q4.py](q4.py) ([q4_sol.py](q4_sol.py))
 - [q5.py](q5.py) ([q5_sol.py](q5_sol.py))
 - [q6.py](q6.py) ([q6_sol.py](q6_sol.py))
+
+All questions and solutions on one page: [presentation_printable.html](presentation_printable.html)
