@@ -7,4 +7,7 @@
 - [q5.py](q5.py) ([q5_sol.py](q5_sol.py))
 - [q6.py](q6.py) ([q6_sol.py](q6_sol.py))
 
-All questions and solutions on one page: [presentation_printable.html](presentation_printable.html)
+All the questions in one file:
+
+- Questions only: [lecture8_questions.pdf](lecture8_questions.pdf)
+- Questions and solutions: [lecture8_questions_and_solutions.pdf](lecture8_questions_and_solutions.pdf)
