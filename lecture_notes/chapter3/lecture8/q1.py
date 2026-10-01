@@ -13,3 +13,32 @@ Enter a number: 2.6
 f(2.6) = 6.2
 ```
 """
+
+def f(x):
+    return 2 * x + 1
+
+print(f(2))
+print(f(5))
+
+result = f(1000)
+print(result)
+
+x = float(input('Enter a number: '))
+
+# f(2.6) = 6.2
+print('f(' + str(x) + ') = ' + str(f(x)))
+print(f'f({x}) = {f(x)}')
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -48,12 +48,17 @@ easy to read on the web in a couple of ways:
 - Read this textbook chapter: [chapter 3](textbook/chap03.ipynb)
 - Review these lecture notes: [chapter 3 lecture notes](lecture_notes/chapter3/chapter3_lecture.ipynb)
   - [lecture 8 examples](lecture_notes/chapter3/lecture8/)
+  - [lecture 9 examples](lecture_notes/chapter3/lecture9/)
 - Do this homework: [chapter 3 homework](lecture_notes/chapter3/homework3.ipynb) ([solutions](lecture_notes/chapter3/homework3_sol.ipynb))
 
 ### Week 5 (Oct 5 to Oct 9)
 
-- Read this textbook chapter: [chapter 4](textbook/chap04.ipynb), [chapter 5](textbook/chap05.ipynb)
-- Review these lecture notes: [chapter 4 lecture notes](lecture_notes/chapter4/chapter4_lecture.ipynb), [chapter 5 lecture notes](lecture_notes/chapter5/chapter5_lecture.ipynb)
+- Read this textbook chapter: 
+  - *Optional*: [chapter 4](textbook/chap04.ipynb) is about turtle graphics, which
+    we will not cover on tests. But we will use turtle graphics in some examples
+  - [chapter 5](textbook/chap05.ipynb)
+    in lectures, so it is useful to read.
+- Review these lecture notes: [chapter 5 lecture notes](lecture_notes/chapter5/chapter5_lecture.ipynb) (optionally [chapter 4 lecture notes](lecture_notes/chapter4/chapter4_lecture.ipynb))
 - Do this homework: [chapter 4 homework](lecture_notes/chapter4/homework4.ipynb) ([solutions](lecture_notes/chapter4/homework4_sol.ipynb))
 
 ### Week 6 (Oct 12 to Oct 16)

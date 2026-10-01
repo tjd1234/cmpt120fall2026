@@ -13,3 +13,11 @@ Hello, Ali!
 ```
 
 """
+def hello_string(name):
+    return f'Hello {name}!'
+
+person1 = input('Person 1: ')
+person2 = input('Person 2: ')
+print()
+print(hello_string(person1))
+print(hello_string(person2))

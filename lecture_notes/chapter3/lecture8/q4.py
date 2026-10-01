@@ -12,3 +12,18 @@ Enter a movie name: The Matrix
 +----------+
 ```
 """
+def print_in_bars(word):
+    print(f'|{word}|')
+
+def print_in_box(s):
+    bar = '+' + len(s) * '-' + '+'
+    #print(word)
+    #print(len(word))
+    #bar = 'bar'
+    print(bar)
+    print_in_bars(s)
+    print(bar)
+
+title = input('Movie name: ')
+print()
+print_in_box(title)
