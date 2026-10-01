@@ -54,10 +54,11 @@ easy to read on the web in a couple of ways:
 ### Week 5 (Oct 5 to Oct 9)
 
 - Read this textbook chapter: 
-  - *Optional*: [chapter 4](textbook/chap04.ipynb) is about turtle graphics, which
-    we will not cover on tests. But we will use turtle graphics in some examples
   - [chapter 5](textbook/chap05.ipynb)
-    in lectures, so it is useful to read.
+  - *Optional*: [chapter 4](textbook/chap04.ipynb) is about turtle graphics,
+    which we will not cover on tests. But we will use turtle graphics in some
+    examples in lectures, so it is useful to read.
+    
 - Review these lecture notes: [chapter 5 lecture notes](lecture_notes/chapter5/chapter5_lecture.ipynb) (optionally [chapter 4 lecture notes](lecture_notes/chapter4/chapter4_lecture.ipynb))
 - Do this homework: [chapter 4 homework](lecture_notes/chapter4/homework4.ipynb) ([solutions](lecture_notes/chapter4/homework4_sol.ipynb))
 
