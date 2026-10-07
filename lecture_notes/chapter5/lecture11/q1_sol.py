@@ -1,7 +1,7 @@
 # q1_sol.py
 
 """
-Make fortune cookie program that, when run, randomly prints one of these
+Make a fortune cookie program that, when run, randomly prints one of these
 phrases:
 
 - Whatever you do, always give 100% — unless you're donating blood.
