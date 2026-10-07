@@ -267,6 +267,22 @@ _HELVETICA_BOLD_WIDTHS = [
     333, 556, 611, 556, 611, 556, 333, 611, 611, 278, 278, 556, 278, 889, 611, 611,
     611, 611, 389, 556, 333, 611, 556, 778, 556, 556, 500, 389, 280, 389, 584,
 ]
+# Widths of some common non-ASCII characters, as (regular, bold). Any other
+# character is given the width of a typical letter (556).
+_EXTRA_WIDTHS = {
+    '\u2014': (1000, 1000),  # em dash
+    '\u2013': (556, 556),    # en dash
+    '\u2018': (222, 278),    # left single quote
+    '\u2019': (222, 278),    # right single quote / apostrophe
+    '\u201c': (333, 500),    # left double quote
+    '\u201d': (333, 500),    # right double quote
+    '\u2022': (350, 350),    # bullet
+    '\u2026': (1000, 1000),  # ellipsis
+    '\u00a0': (278, 278),    # non-breaking space
+    '\u00b0': (400, 400),    # degree sign
+    '\u00d7': (584, 584),    # multiplication sign
+    '\u00f7': (584, 584),    # division sign
+}
 # PDF resource names for the three fonts
 _FONTS = {'regular': ('F1', 'Helvetica'), 'bold': ('F2', 'Helvetica-Bold'),
           'mono': ('F3', 'Courier')}
@@ -282,8 +298,16 @@ CODE_PAD = 8                     # space between a code box's edge and its text
 def _text_width(text: str, style: str, size: float) -> float:
     if style == 'mono':
         return len(text) * 0.6 * size
-    table = _HELVETICA_BOLD_WIDTHS if style == 'bold' else _HELVETICA_WIDTHS
-    total = sum(table[ord(c) - 32] if 32 <= ord(c) <= 126 else 556 for c in text)
+    bold = style == 'bold'
+    table = _HELVETICA_BOLD_WIDTHS if bold else _HELVETICA_WIDTHS
+    total = 0
+    for c in text:
+        if 32 <= ord(c) <= 126:
+            total += table[ord(c) - 32]
+        elif c in _EXTRA_WIDTHS:
+            total += _EXTRA_WIDTHS[c][1 if bold else 0]
+        else:
+            total += 556
     return total * size / 1000
 
 
@@ -320,7 +344,7 @@ def _markdown_blocks(md: str):
         code_blocks.append(m.group(2).rstrip('\n'))
         return f'\n\n@@CODEBLOCK{len(code_blocks) - 1}@@\n\n'
 
-    text = re.sub(r'```([a-zA-Z0-9]*)\n([\s\S]*?)```', stash, md)
+    text = re.sub(r'```[ \t]*([a-zA-Z0-9]*)[ \t]*\n([\s\S]*?)```', stash, md)
     blocks = []
     for block in re.split(r'\n\s*\n', text):
         trimmed = block.strip()
@@ -854,7 +878,7 @@ function renderInlineMarkup(text) {
 function renderMarkdownLite(md) {
   md = (md || '').replace(/\r\n/g, '\n').trim();
   if (!md) return '';
-  const fenceRegex = /```([a-zA-Z0-9]*)\n([\s\S]*?)```/g;
+  const fenceRegex = /```[ \t]*([a-zA-Z0-9]*)[ \t]*\n([\s\S]*?)```/g;
   const codeBlocks = [];
   const placeholderText = md.replace(fenceRegex, function(_, lang, code) {
     const idx = codeBlocks.length;

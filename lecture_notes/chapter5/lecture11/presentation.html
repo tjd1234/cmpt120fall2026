@@ -234,7 +234,7 @@
 Make fortune cookie program that, when run, randomly prints one of these
 phrases:
 
-- Whatever you do, always give 100% —- unless you're donating blood.
+- Whatever you do, always give 100% — unless you're donating blood.
 - Be a cupcake in a world full of muffins.
 - We become what we think about: so don't think too much about hot dogs.
 - You can’t have everything. Where would you put it?
@@ -287,7 +287,7 @@ return (not print!) their result.
 
 Use these functions in a sensible way in your program.
 
-``` 
+```
 How long is the field? 6 
 
 The area is 36. 
@@ -485,7 +485,7 @@ function renderInlineMarkup(text) {
 function renderMarkdownLite(md) {
   md = (md || '').replace(/\r\n/g, '\n').trim();
   if (!md) return '';
-  const fenceRegex = /```([a-zA-Z0-9]*)\n([\s\S]*?)```/g;
+  const fenceRegex = /```[ \t]*([a-zA-Z0-9]*)[ \t]*\n([\s\S]*?)```/g;
   const codeBlocks = [];
   const placeholderText = md.replace(fenceRegex, function(_, lang, code) {
     const idx = codeBlocks.length;

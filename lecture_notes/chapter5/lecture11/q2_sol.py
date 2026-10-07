@@ -11,7 +11,7 @@ return (not print!) their result.
 
 Use these functions in a sensible way in your program.
 
-``` 
+```
 How long is the field? 6 
 
 The area is 36. 
