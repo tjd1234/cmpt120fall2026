@@ -20,7 +20,7 @@ The perimeter is 24.
 
 """
 
-def square_area(size):
+def squarea(size):
     return size * size
 
 def square_perimeter(size):

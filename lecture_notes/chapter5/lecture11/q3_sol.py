@@ -42,5 +42,12 @@ Enter an integer: 43
 """
 
 n = int(input("Enter an integer: "))
-for i in range(1, 13):
-    print(f"{n} x {i} = {n * i}")
+if n < 1 or n > 12:
+    print("Can't do it!")
+else:
+    for i in range(1, 13):
+        print(f"{n} x {i} = {n * i}")
+
+
+
+    
