@@ -50,3 +50,25 @@ Bad: they're different!
 ```
 
 """
+
+def my_abs(x):
+    if x < 0:
+        return -x
+    else: # x >= 0
+        return x
+
+
+x = float(input('Enter a float: '))
+
+result_my_abs = my_abs(x)
+result_abs = abs(x)
+print(f'my_abs({x}) returns {result_my_abs}')
+print(f'   abs({x}) returns {result_abs}')
+
+if result_my_abs == result_abs:
+    print("Good: they're the same!")
+else:
+    print("Bad: they're different!")
+
+
+

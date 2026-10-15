@@ -42,5 +42,27 @@ Age? 70
 
 Your ticket costs $7.
 ```
-
 """
+
+hour = int(input('Show start hour (0-23)? '))
+
+if hour < 12 or hour >= 17:
+    print('\nYour ticket costs $14.')
+else: # 12 <= hour < 17 (rule 1 satisfied)
+    age = int(input('Age? '))
+    if age <= 12 or age >= 65:
+        print('\nYour ticket costs $7.')
+    else: # 12 < age < 65
+        # Student card (y/n)? y
+        student_card = input('Student card (y/n)? ')
+        if student_card == 'y':
+            print('\nYour ticket costs $7.')
+        else:
+            print('\nYour ticket costs $14.')
+        
+        
+
+
+
+
+           

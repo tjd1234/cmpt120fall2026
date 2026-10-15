@@ -68,6 +68,7 @@ easy to read on the web in a couple of ways:
 - Read this textbook chapter: [chapter 5](textbook/chap05.ipynb), [chapter 6](textbook/chap06.ipynb)
 - Review these lecture notes: [chapter 5 lecture notes](lecture_notes/chapter5/chapter5_lecture.ipynb), [chapter 6 lecture notes](lecture_notes/chapter6/chapter6_lecture.ipynb)
   - [lecture 12 presentation](lecture_notes/chapter5/lecture12)
+  - [lecture 13 examples](lecture_notes/chapter5/lecture13/)
 - Do this homework: [chapter 5 homework](lecture_notes/chapter5/homework5.ipynb) ([solutions](lecture_notes/chapter5/homework5_sol.ipynb)), [chapter 6 homework](lecture_notes/chapter6/homework6.ipynb) ([solutions](lecture_notes/chapter6/homework6_sol.ipynb))
 
 ### Week 7 (Oct 19 to Oct 23)

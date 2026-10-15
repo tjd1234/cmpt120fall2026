@@ -27,3 +27,21 @@ All the returned numbers should be the same.
 Note that the recursive one might fail if `n` is too large, e.g. try running it
 with `n = 1000`.
 """
+
+n = 5
+sum_formula = (n * (n + 1)) // 2  # 3 operations: *, +, //
+
+print(f'sum_formula({n}) returns {sum_formula}')
+
+# for-loop: n operations: += each time through the loop
+total = 0
+for i in range(1, n + 1):
+    total += i
+
+print(f'   sum_loop({n}) returns {total}')
+
+
+
+
+
+
