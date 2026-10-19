@@ -30,3 +30,15 @@ Your task is to update the function as follows:
 - convert and update the test cases to work with this new function
 
 """
+def has_m_print(word):
+    for letter in word.lower():
+        #if letter == 'm' or letter == 'M':
+        if letter == 'm':
+            print('this word has an "m" or "M"')
+
+# test code
+has_m_print('tumble')  # this word has an "m"
+has_m_print('mummy')
+has_m_print('Map')     # nothing printed 
+has_m_print('apple')   # nothing printed 
+has_m_print('')        # nothing printed

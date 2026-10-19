@@ -37,3 +37,28 @@ Price of meal 3: done
          Total: $26.50
 ```
 """
+
+n = 1
+s = input(f'Enter price of meal {n}: ')
+subtotal = 0.0
+while s != 'done':
+    subtotal += float(s)
+    n += 1
+    s = input(f'Enter price of meal {n}: ')
+
+print()
+print(f'Subtotal: ${subtotal:.2f}')
+
+total = subtotal
+#print(f'n = {n}')
+if n - 1 > 3:
+    service_charge = 0.2 * subtotal
+    total += service_charge
+    print(f'Service charge: ${service_charge:.2f}')
+
+print(f'Total: ${total:.2f}')
+
+
+
+
+
