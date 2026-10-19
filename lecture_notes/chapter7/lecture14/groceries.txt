@@ -1,0 +1,5 @@
+eggs
+milk
+coffee
+more coffee
+chocolate
