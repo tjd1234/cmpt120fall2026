@@ -1,0 +1,31 @@
+AI Activity Notes
+=================
+
+First and Last Name:
+ SFU Student number:
+
+
+1. What AI did you use?
+  
+
+
+
+
+
+2. How did you check that Smarty never loses?
+
+
+
+
+
+
+3. What was the easiest part of this activity, and the most difficult?
+
+
+
+
+
+
+4. Overall, what did you learn AI from this activity? Do you think Activity is a
+   good tool for programming? Should CMPT 120 cover AI coding?
+
