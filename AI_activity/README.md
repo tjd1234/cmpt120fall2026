@@ -15,7 +15,6 @@ Save your prompts, and submit them with your finished program. You *don't* need
 to do it all in one big prompt. Try asking the AI to make the basic game, and
 then add features one at a time with separate prompts.
 
-
 ## Required features
 
 - graphical board and pieces
@@ -77,4 +76,6 @@ Please submit:
   used to guide the AI.
 
 - A filled-in copy of [notes.txt](notes.txt). Please answer all the questions.
-  
+
+Compress all four of these files into a single zip file named `AI_activity.zip`,
+and then submit it to Canvas.
