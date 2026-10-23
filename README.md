@@ -77,6 +77,8 @@ easy to read on the web in a couple of ways:
 does not cover while-loops, so please see the lecture notes and PowerPoint
 presentation.
 - Review these lecture notes: [chapter 7 lecture notes](lecture_notes/chapter7/chapter7_lecture.ipynb)
+  - [lecture 14 examples](lecture_notes/chapter7/lecture14/)
+  - [lecture 15 examples](lecture_notes/chapter7/lecture15/)
 - Do this homework: [chapter 7 homework](lecture_notes/chapter7/homework7.ipynb) ([solutions](lecture_notes/chapter7/homework7_sol.ipynb))
 
 ### Week 8 (Oct 26 to Oct 30)
