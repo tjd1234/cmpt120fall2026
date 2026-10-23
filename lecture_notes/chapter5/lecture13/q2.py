@@ -19,3 +19,23 @@ The prime numbers less than 100 are:
 Total number of primes less than 100: 25
 ```
 """
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False # n had a divisor, not prime
+    return True  # n is prime
+
+# testing
+n = 10000
+prime_count = 0
+for i in range(n):
+    if is_prime(i):
+        print(i, end=' ')
+        prime_count += 1
+
+#print()
+#print()
+print(f'\n\nTotal number of primes less than {n}: {prime_count}')

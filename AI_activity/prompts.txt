@@ -1,0 +1,8 @@
+AI Activity Prompts
+===================
+
+First and Last Name:
+ SFU Student number:
+
+Please list the prompts you used to guide the AI to make the program.
+
