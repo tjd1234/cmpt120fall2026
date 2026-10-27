@@ -26,3 +26,19 @@ What file would you like to print? groceries.txt
 5. chocolate
 ```
 """
+
+#filename = input('Enter file: ')
+filename = 'groceries.txt'
+
+input_file = open(filename, 'r')  # 'r' means for reading
+
+line_number = 1
+for line in input_file:
+    line = line.strip()
+    print(f'{line_number}. {line}')
+    line_number += 1
+
+
+    
+
+

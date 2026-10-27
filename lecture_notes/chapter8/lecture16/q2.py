@@ -15,3 +15,31 @@ English words.
 14. tsktsks
 ```
 """
+def has_vowel(s):
+    for char in s:
+        if char in 'aeiouy':
+            return True
+    return False
+
+#def has_vowel(s):
+#    for vowel in 'aeiouy':
+#        if vowel in s:
+#            return True
+#    return False
+
+
+word_file = open('words.txt', 'r')
+word_num = 1
+for word in word_file:
+    word = word.strip()
+    if not has_vowel(word):
+        print(f'{word_num}. {word}')
+        word_num += 1
+#    if has_vowel(word):
+#        pass
+#    else:
+#        print(f'{word_num}. {word}')
+#        word_num += 1
+
+
+    

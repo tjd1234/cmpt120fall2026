@@ -86,6 +86,7 @@ presentation.
 - Read this textbook chapter: [chapter 8](textbook/chap08.ipynb)
 - Review these lecture notes: [chapter 8 lecture notes](lecture_notes/chapter8/chapter8_lecture.ipynb)
   - [lecture 16 examples](lecture_notes/chapter8/lecture16/)
+  - [lecture 17 examples](lecture_notes/chapter8/lecture17/)
 - [practice problems](lecture_notes/chapter8/chapter8_practice.ipynb) ([solutions](lecture_notes/chapter8/chapter8_practice_sol.ipynb)); 
 [ROT13 example](lecture_notes/chapter8/rot13.ipynb)
 - Do this homework: [chapter 8 homework](lecture_notes/chapter8/homework8.ipynb) ([solutions](lecture_notes/chapter8/homework8_sol.ipynb))
