@@ -13,7 +13,7 @@ easy to read on the web in a couple of ways:
 1. **Directly through their github web links.** Just click on the Github link.
 2. **Using the [Jupyter notebook viewer](https://nbviewer.jupyter.org/).** Paste
   the github link into the viewer.
-3. **Use [Google Colab][https://colab.research.google.com/].** You will need a
+3. **Use [Google Colab](https://colab.research.google.com/).** You will need a
   (free) Google account to use it. With [Google Colab][https://colab.research.google.com/] 
   you can open notebooks interactively in your web browser (and run cells
   online), save and edit copies, and also get pretty much all Python libraries
