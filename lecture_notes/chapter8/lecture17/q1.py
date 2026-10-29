@@ -15,3 +15,12 @@ s[3] is 'l'
 s[4] is 'o'
 ```
 """
+s = input('Enter a string: ')
+
+print(f"s = '{s}'")
+
+for i in range(len(s)):
+    char = s[i]
+    print(f"s[{i}] is '{char}'")
+
+

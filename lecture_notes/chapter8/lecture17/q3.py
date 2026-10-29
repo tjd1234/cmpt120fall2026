@@ -24,3 +24,13 @@ Enter a word: <enter>
 Done!
 ```
 """
+def pluralize(s):
+    if s == '' or s[-1] == 's':
+        return s
+    elif s[-1] == 'y':
+        n = len(s)
+        return s[0:n-1] + 'ies'
+    else:
+        return s + 's'
+
+    

@@ -16,3 +16,17 @@ Enter a date (YYYY-MM-DD): <enter>
 Done!
 ```
 """
+
+while True:
+    date = input('Enter a date (YYYY-MM-DD): ')
+    date = date.strip()
+    if date == '':
+        break
+    year = date[0:4]
+    month = date[5:7]
+    day = date[8:10]
+
+    # DD/MM/YYYY
+    print(f'{day}/{month}/{year}')
+
+print('Done!')

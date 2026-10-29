@@ -1,0 +1,120 @@
+# spelling_bee.py
+
+#
+# Write solutions to each of the following questions. Make sure to test each
+# function in the Python interpreter to make sure they work correctly.
+#
+
+#
+# Question 1
+#
+# returns True if the word has at least 4 letters, and False otherwise
+#
+def is_long_enough(word):
+    pass
+
+
+#
+# Question 2
+#
+# returns True if the word contains the required letter, and False otherwise
+#
+def has_required(word, required_letter):
+    pass
+
+
+#
+# Question 3
+#
+# returns True if each letter in word is also in puzzle_letters, and False
+# otherwise
+#
+def uses_only(word, puzzle_letters):
+    pass
+
+
+#
+# Question 4
+#
+# returns True if every letter in puzzle_letters is in word, and False otherwise
+#
+def is_pangram(word, puzzle_letters):
+    pass
+
+
+#
+# Question 5
+#
+# returns the score of word for the given required letter and puzzle letters
+#
+# The scoring rules are:
+#
+# - words that contain a letter *not* in puzzle_letters score 0 points
+# - words that don't contain the required letter score 0 points
+# - words less than 4 letters score 0 points
+# - words with exactly 4 letters score 1 point
+# - words with more than 4 letters score 1 point per letter; if the word is a
+#   pangram, then add 7 additional points
+#
+def word_score(word, required_letter, puzzle_letters):
+    pass
+
+#
+# Use this code to test your word_score function.
+#
+# puzzle_letters = 'gpdroan'
+# required_letter = 'r'
+# test_words = ['poor',       # 1
+#               'drop',       # 1
+#               'droop',      # 5
+#               'propaganda', # 17
+#               'rap',        # 0
+#               'rope',       # 0
+#               'pog']        # 0
+# for word in test_words:
+#     print(word, word_score(word, required_letter, puzzle_letters))
+
+
+#
+# Question 6
+#
+# Write a program that solves a Spelling Bee puzzle. Do it as follows:
+#
+#    For each word in words.txt (a list of English words) do the following: 
+#       Use word_score to calculate the score of the word. 
+#       If the score is greater than 0, then print the word and its score.
+#    
+#    After all the words have been processed, print the total number words
+#    found, and the total sum of all the scores.
+#
+# For example:
+#
+#     ... list of words and scores ...
+# 
+#     Puzzle letters: gpdroan
+#    Required letter: r
+#        Total words: 76
+#        Total score: 306
+#
+
+
+#
+# Question 7
+#
+# Re-do question 6, but now use a list called found_words to keep track of all
+# the words found in the puzzle, and the their scores. Initialise the list
+# before reading any words like this:
+#
+#    found_words = []
+#
+# To add a word and its score to the end of the list, use the append method like
+# this:
+#
+#    found_words.append((score, word))
+#
+# Now you can print the words sorted by score like this:
+#
+#    found_words.sort() 
+#    for score, word in found_words: 
+#       print(score, word)
+#
