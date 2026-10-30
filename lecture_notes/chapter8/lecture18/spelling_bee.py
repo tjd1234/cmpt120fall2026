@@ -1,8 +1,8 @@
 # spelling_bee.py
 
 #
-# Write solutions to each of the following questions. Make sure to test each
-# function in the Python interpreter to make sure they work correctly.
+# Write solutions to each of the following questions. Test each function as you
+# go in the Python interpreter to make sure they work correctly.
 #
 
 #
@@ -81,8 +81,8 @@ def word_score(word, required_letter, puzzle_letters):
 # Write a program that solves a Spelling Bee puzzle. Do it as follows:
 #
 #    For each word in words.txt (a list of English words) do the following: 
-#       Use word_score to calculate the score of the word. 
-#       If the score is greater than 0, then print the word and its score.
+#       - Use word_score to calculate the score of the word. 
+#       - If the score is greater than 0, then print the word and its score.
 #    
 #    After all the words have been processed, print the total number words
 #    found, and the total sum of all the scores.
