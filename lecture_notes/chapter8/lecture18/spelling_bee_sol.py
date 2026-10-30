@@ -6,7 +6,14 @@
 # returns True if the word has at least 4 letters, and False otherwise
 #
 def is_long_enough(word):
-    return len(word) >= 4
+    if len(word) >= 4:
+        return True
+    else:
+        return False
+
+# Alternative solution:
+# def is_long_enough(word):
+#     return len(word) >= 4
 
 
 #
@@ -15,7 +22,14 @@ def is_long_enough(word):
 # returns True if the word contains the required letter, and False otherwise
 #
 def has_required(word, required_letter):
-    return required_letter in word
+    if required_letter in word:
+        return True
+    else:
+        return False
+
+# Alternative solution:
+# def has_required(word, required_letter):
+#     return required_letter in word
 
 
 #
@@ -95,8 +109,8 @@ def word_score(word, required_letter, puzzle_letters):
 # Write a program that solves a Spelling Bee puzzle. Do it as follows:
 #
 #    For each word in words.txt (a list of English words) do the following: 
-#       Use word_score to calculate the score of the word. 
-#       If the score is greater than 0, then print the word and its score.
+#       - Use word_score to calculate the score of the word. 
+#       - If the score is greater than 0, then print the word and its score.
 #    
 #    After all the words have been processed, print the total number words
 #    found, and the total sum of all the scores.
