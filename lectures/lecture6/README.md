@@ -1,4 +1,4 @@
-# lecture6 Questions and Answers
+# Lecture 6 Questions and Answers
 
 - [q1.py](q1.py) ([q1_sol.py](q1_sol.py))
 - [q2.py](q2.py) ([q2_sol.py](q2_sol.py))
@@ -10,3 +10,5 @@ All the questions in one file:
 
 - Questions only: [lecture6_questions.pdf](lecture6_questions.pdf)
 - Questions and solutions: [lecture6_questions_and_solutions.pdf](lecture6_questions_and_solutions.pdf)
+
+All the files in one download: [lecture6.zip](lecture6.zip)

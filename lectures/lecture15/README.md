@@ -1,4 +1,4 @@
-# lecture15 Questions and Answers
+# Lecture 15 Questions and Answers
 
 - [q1.py](q1.py) ([q1_sol.py](q1_sol.py))
 - [q2.py](q2.py) ([q2_sol.py](q2_sol.py))
@@ -8,3 +8,5 @@ All the questions in one file:
 
 - Questions only: [lecture15_questions.pdf](lecture15_questions.pdf)
 - Questions and solutions: [lecture15_questions_and_solutions.pdf](lecture15_questions_and_solutions.pdf)
+
+All the files in one download: [lecture15.zip](lecture15.zip)

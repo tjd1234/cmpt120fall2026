@@ -1,4 +1,4 @@
-# lecture11 Questions and Answers
+# Lecture 11 Questions and Answers
 
 - [q1.py](q1.py) ([q1_sol.py](q1_sol.py))
 - [q2.py](q2.py) ([q2_sol.py](q2_sol.py))
@@ -9,3 +9,5 @@ All the questions in one file:
 
 - Questions only: [lecture11_questions.pdf](lecture11_questions.pdf)
 - Questions and solutions: [lecture11_questions_and_solutions.pdf](lecture11_questions_and_solutions.pdf)
+
+All the files in one download: [lecture11.zip](lecture11.zip)

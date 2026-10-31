@@ -1,4 +1,4 @@
-# lecture8 Questions and Answers
+# Lecture 8 Questions and Answers
 
 - [q1.py](q1.py) ([q1_sol.py](q1_sol.py))
 - [q2.py](q2.py) ([q2_sol.py](q2_sol.py))
@@ -11,3 +11,5 @@ All the questions in one file:
 
 - Questions only: [lecture8_questions.pdf](lecture8_questions.pdf)
 - Questions and solutions: [lecture8_questions_and_solutions.pdf](lecture8_questions_and_solutions.pdf)
+
+All the files in one download: [lecture8.zip](lecture8.zip)
