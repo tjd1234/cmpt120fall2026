@@ -97,6 +97,7 @@ presentation.
 
 - Read this textbook chapter: [chapter 9](textbook/chap09.ipynb)
 - Review these lecture notes: [chapter 9 lecture notes](lecture_notes/chapter9/chapter9_lecture.ipynb)
+  - [lecture 19 examples](lectures/lecture19/)
 - Do this homework: [chapter 9 homework](lecture_notes/chapter9/homework9.ipynb) ([solutions](lecture_notes/chapter9/homework9_sol.ipynb))
 - Extra practice problems: [list problems](lecture_notes/chapter9/chapter9_practice.ipynb) ([solutions](lecture_notes/chapter9/chapter9_practice_sol.ipynb))
 
