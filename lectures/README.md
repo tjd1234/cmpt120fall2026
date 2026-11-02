@@ -19,3 +19,4 @@ Click a lecture to see all its files, including the question files (`qN.py`) and
 | [Lecture 16](lecture16/) | [Presentation](lecture16/lecture16_presentation.html) | [Questions](lecture16/lecture16_questions.pdf) | [Solutions](lecture16/lecture16_questions_and_solutions.pdf) | [ZIP](lecture16/lecture16.zip) |
 | [Lecture 17](lecture17/) | [Presentation](lecture17/lecture17_presentation.html) | [Questions](lecture17/lecture17_questions.pdf) | [Solutions](lecture17/lecture17_questions_and_solutions.pdf) | [ZIP](lecture17/lecture17.zip) |
 | [Lecture 18](lecture18/) |  |  |  | [ZIP](lecture18/lecture18.zip) |
+| [Lecture 19](lecture19/) | [Presentation](lecture19/lecture19_presentation.html) | [Questions](lecture19/lecture19_questions.pdf) | [Solutions](lecture19/lecture19_questions_and_solutions.pdf) | [ZIP](lecture19/lecture19.zip) |
