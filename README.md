@@ -1,6 +1,8 @@
 # CMPT 120, Fall 2026
 
-Due dates, marks, discussions, etc. are all on Canvas. 
+Due dates, marks, discussions, etc. are all on Canvas.
+
+[Here is a link to all the examples used in the lectures](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures).
 
 ## Lecture Notes (Fall 2026)
 
@@ -28,6 +30,7 @@ easy to read on the web in a couple of ways:
 
 - Read this textbook chapter: [chapter 1](textbook/chap01.ipynb)
 - Review these lecture notes: [chapter 1 lecture notes](lecture_notes/chapter1/chapter1_lecture.ipynb)
+- [Lecture examples]([lecture notes](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures)):
   - [Lecture 4 examples](lectures/lecture4/)
   - [Lecture 5 examples](lectures/lecture5/)
 - Do this homework: [chapter 1 homework](lecture_notes/chapter1/homework1.ipynb) ([solutions](lecture_notes/chapter1/homework1_sol.ipynb))
@@ -36,6 +39,7 @@ easy to read on the web in a couple of ways:
 
 - Read this textbook chapter: [chapter 2](textbook/chap02.ipynb)
 - Review these lecture notes: [chapter 2 lecture notes](lecture_notes/chapter2/chapter2_lecture.ipynb)
+- [Lecture examples]([lecture notes](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures)):
   - [lecture 6 examples](lectures/lecture6/)
   - [lecture 7 examples](lectures/lecture7/)
   - [tshirt module](code/tshirt.py), [demo](code/tshirt_demo.py)
@@ -47,6 +51,7 @@ easy to read on the web in a couple of ways:
 
 - Read this textbook chapter: [chapter 3](textbook/chap03.ipynb)
 - Review these lecture notes: [chapter 3 lecture notes](lecture_notes/chapter3/chapter3_lecture.ipynb)
+- [Lecture examples]([lecture notes](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures)):
   - [lecture 8 examples](lectures/lecture8/)
   - [lecture 9 examples](lectures/lecture9/)
 - Do this homework: [chapter 3 homework](lecture_notes/chapter3/homework3.ipynb) ([solutions](lecture_notes/chapter3/homework3_sol.ipynb))
@@ -59,6 +64,7 @@ easy to read on the web in a couple of ways:
     which we will not cover on tests. But we will use turtle graphics in some
     examples in lectures, so it is useful to read.
 - Review these lecture notes: [chapter 5 lecture notes](lecture_notes/chapter5/chapter5_lecture.ipynb) (optionally [chapter 4 lecture notes](lecture_notes/chapter4/chapter4_lecture.ipynb))
+- [Lecture examples]([lecture notes](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures)):
   - [lecture 10 examples](lectures/lecture10/)
   - [lecture 11 examples](lectures/lecture11/)
 - Do this homework: [chapter 5 homework](lecture_notes/chapter5/homework5.ipynb) ([solutions](lecture_notes/chapter5/homework5_sol.ipynb)) (optionally [chapter 4 homework](lecture_notes/chapter4/homework4.ipynb) ([solutions](lecture_notes/chapter4/homework4_sol.ipynb)))
@@ -67,6 +73,7 @@ easy to read on the web in a couple of ways:
 
 - Read this textbook chapter: [chapter 5](textbook/chap05.ipynb), [chapter 6](textbook/chap06.ipynb)
 - Review these lecture notes: [chapter 5 lecture notes](lecture_notes/chapter5/chapter5_lecture.ipynb), [chapter 6 lecture notes](lecture_notes/chapter6/chapter6_lecture.ipynb)
+- [Lecture examples]([lecture notes](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures)):
   - [lecture 12 examples](lectures/lecture12)
   - [lecture 13 examples](lectures/lecture13/)
 - Do this homework: [chapter 5 homework](lecture_notes/chapter5/homework5.ipynb) ([solutions](lecture_notes/chapter5/homework5_sol.ipynb)), [chapter 6 homework](lecture_notes/chapter6/homework6.ipynb) ([solutions](lecture_notes/chapter6/homework6_sol.ipynb))
@@ -77,6 +84,7 @@ easy to read on the web in a couple of ways:
 does not cover while-loops, so please see the lecture notes and PowerPoint
 presentation.
 - Review these lecture notes: [chapter 7 lecture notes](lecture_notes/chapter7/chapter7_lecture.ipynb)
+- [Lecture examples]([lecture notes](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures)):
   - [lecture 14 examples](lectures/lecture14/)
   - [lecture 15 examples](lectures/lecture15/)
 - Do this homework: [chapter 7 homework](lecture_notes/chapter7/homework7.ipynb) ([solutions](lecture_notes/chapter7/homework7_sol.ipynb))
@@ -85,6 +93,7 @@ presentation.
 
 - Read this textbook chapter: [chapter 8](textbook/chap08.ipynb)
 - Review these lecture notes: [chapter 8 lecture notes](lecture_notes/chapter8/chapter8_lecture.ipynb)
+- [Lecture examples]([lecture notes](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures)):
   - [lecture 16 examples](lectures/lecture16/)
   - [lecture 17 examples](lectures/lecture17/)
   - [lecture 18: Spelling Bee](lectures/lecture18/)
@@ -97,6 +106,7 @@ presentation.
 
 - Read this textbook chapter: [chapter 9](textbook/chap09.ipynb)
 - Review these lecture notes: [chapter 9 lecture notes](lecture_notes/chapter9/chapter9_lecture.ipynb)
+- [Lecture examples]([lecture notes](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures)):
   - [lecture 19 examples](lectures/lecture19/)
   - [lecture 20 examples](lectures/lecture20/)
 - Do this homework: [chapter 9 homework](lecture_notes/chapter9/homework9.ipynb) ([solutions](lecture_notes/chapter9/homework9_sol.ipynb))
