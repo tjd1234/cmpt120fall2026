@@ -15,21 +15,40 @@ For example:
 - fix_code("TH-8328", 3, "7") returns "TH-7328"
 - fix_code("XX-1111", 0, "R") returns "RX-1111"
 
-Test your program by calling fix_code with the given examples and printing the
-results as shown.
-
-Sample Run
+Use the following code to test your fix_code function.
 
 ```
-BX-4A71 -> BX-4971
-TH-8328 -> TH-7328
-XX-1111 -> RX-1111
+if fix_code('BX-4A71', 4, '9') == 'BX-4971':
+    print("Test 1 passed")
+else:
+    print("Test 1 FAILED!!!")
+
+if fix_code('TH-8328', 3, '7') == 'TH-7328':
+    print("Test 2 passed")
+else:
+    print("Test 2 FAILED!!!")
+
+if fix_code('XX-1111', 0, 'R') == 'RX-1111':
+    print("Test 3 passed")
+else:
+    print("Test 3 FAILED!!!")
 ```
 """
 
 def fix_code(code, position, correct_char):
     return code[:position] + correct_char + code[position+1:]
 
-print(f"BX-4A71 -> {fix_code('BX-4A71', 4, '9')}")
-print(f"TH-8328 -> {fix_code('TH-8328', 3, '7')}")
-print(f"XX-1111 -> {fix_code('XX-1111', 0, 'R')}")
+if fix_code('BX-4A71', 4, '9') == 'BX-4971':
+    print("Test 1 passed")
+else:
+    print("Test 1 FAILED!!!")
+
+if fix_code('TH-8328', 3, '7') == 'TH-7328':
+    print("Test 2 passed")
+else:
+    print("Test 2 FAILED!!!")
+
+if fix_code('XX-1111', 0, 'R') == 'RX-1111':
+    print("Test 3 passed")
+else:
+    print("Test 3 FAILED!!!")
