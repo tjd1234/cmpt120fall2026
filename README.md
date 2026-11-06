@@ -142,7 +142,7 @@ presentation.
 - Do this homework: [sorting homework](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting_homework.ipynb) ([solutions](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting_homework_sol.ipynb))
 - Practice problems: [selection sort](lecture_notes/chapter_algorithms/alg3_sorting/selection_sort_start.py) ([solutions](lecture_notes/chapter_algorithms/alg3_sorting/selection_sort_sol.py))
 
-### Week 13 (Nov 30 to Dec 4
+### Week 13 (Nov 30 to Dec 4)
 
 - slack time
 
