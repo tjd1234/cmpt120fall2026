@@ -1,4 +1,5 @@
-Java Hut Cafe
+The Java Hut Cafe
+
 latte: $5.25
 muffin: $3.50
 tea: $2.75
