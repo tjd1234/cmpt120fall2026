@@ -8,30 +8,31 @@ For example, the term code 1267 means Fall 2026 because:
 - the next two digits are 26, the last two digits of the year 2026
 - the last digit is a 7, which is the semester code for Fall
 
-Using your semesters dictionary, write code that takes a semester name and a
-year and prints the term code. It should read in the semester name, the year,
-and then print the term code. You do *not* need to repeatedly ask the user, i.e.
-it can stop after the printing the term code.
-
-3 Sample Runs
+The semester codes are:
 
 ```
-Enter semester: Fall
-Enter year: 2026
-Fall 2026 term code: 1267
-
-Enter semester: Spring
-Enter year: 2027
-Spring 2027 term code: 1271
-
-Enter semester: Summer
-Enter year: 2026
-Summer 2026 term code: 1264
+Semester   Code
+---------------
+ Spring      1
+ Summer      4
+ Fall        7
 ```
 
-Use this dictionary in your program:
+Write a program that reads in a term code and prints the year and term as shown.
+
+Sample Runs
 
 ```
-codes = {'spring': 1, 'summer': 4, 'fall': 7}
+Term code: 1267
+Fall 2026
+
+Term code: 1161
+Spring 2016
+
+Term code: 1274
+Summer 2027
+
+Term code: <enter>
+done!
 ```
 """
