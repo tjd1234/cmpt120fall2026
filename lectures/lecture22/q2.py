@@ -1,34 +1,37 @@
 # q2.py
 
 """
-Write a program that repeatedly asks the user to enter a term *code number* and
-the prints the corresponding semester name. It should stop when the user types
-<return>, and print a helpful message if an invalid code is typed. Use a
-dictionary to efficiently store the semester codes.
+SFU term codes are 4-digit numbers, where each number has a specific meaning.
+For example, the term code 1267 means Fall 2026 because:
 
-Here are the semester codes:
+- the first digit is a 1 (for this century)
+- the next two digits are 26, the last two digits of the year 2026
+- the last digit is a 7, which is the semester code for Fall
 
-```
-Semester   Code
----------------
- Spring      1
- Summer      4
- Fall        7
-```
+Using your semesters dictionary, write code that takes a semester name and a
+year and prints the term code. It should read in the semester name, the year,
+and then print the term code. You do *not* need to repeatedly ask the user, i.e.
+it can stop after the printing the term code.
 
-Sample Run
+3 Sample Runs
 
 ```
-Enter semester code: 4
-4 is Summer
+Enter semester: Fall
+Enter year: 2026
+Fall 2026 term code: 1267
 
-Enter semester code: 8
-8 is invalid
+Enter semester: Spring
+Enter year: 2027
+Spring 2027 term code: 1271
 
-Enter semester code: 1
-1 is Spring
+Enter semester: Summer
+Enter year: 2026
+Summer 2026 term code: 1264
+```
 
-Enter semester code: <return>
-All done!
+Use this dictionary in your program:
+
+```
+codes = {'spring': 1, 'summer': 4, 'fall': 7}
 ```
 """

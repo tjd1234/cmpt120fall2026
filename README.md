@@ -117,6 +117,8 @@ presentation.
 - Read this textbook chapter: [chapter 10](textbook/chap10.ipynb)
 - Review these lecture notes: [chapter 10 lecture notes](lecture_notes/chapter10/chapter10_lecture.ipynb)
 - [Lecture examples](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures)
+  - [lecture 21](lectures/lecture21)
+  - [lecture 22](lectures/lecture22)
 - Practice problems:
   - [basic dictionaries](lecture_notes/chapter10/dictionaries1_start.py) ([solutions](lecture_notes/chapter10/dictionaries1_sol.py))
   - [reverse word counting](lecture_notes/chapter10/word_check_start.py) ([solutions](lecture_notes/chapter10/word_check_sol.py))
