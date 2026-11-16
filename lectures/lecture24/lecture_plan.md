@@ -56,13 +56,19 @@ import boxes
 
 boxes.setup(5)
 boxes.show_title("Meet the boxes")
+
+boxes.done()
 ```
 
 **Say:** "This makes a window with 5 closed boxes. Each box hides a number,
-and the boxes are numbered underneath starting at 0, just like a list. When
-the program finishes, the window stays open and a Restart button appears:
-clicking it runs the whole program again with new numbers in the boxes."
-`show_title` puts a title at the top of the window.
+and the boxes are numbered underneath starting at 0, just like a list.
+`boxes.done()` is always the last line of the program: it keeps the window
+open and shows a Restart button. Clicking Restart runs the whole program
+again with new numbers in the boxes." `show_title` puts a title at the top
+of the window.
+
+In the steps below, add the new code *above* the `boxes.done()` line, so
+that `boxes.done()` stays last.
 
 **Step 2: open a box.**
 
@@ -114,12 +120,15 @@ import boxes
 
 boxes.setup(10)
 boxes.show_title("Linear search")
-target = boxes.random_value()
+target = boxes.pick_target_value()
 boxes.show_target(target)
 boxes.wait_for_start()
 
 # TODO: open the boxes one at a time, starting at box 0, until you find
 # target. Highlight the box it is in, and print its index.
+
+
+boxes.done()   # keep the window open and show the Restart button
 ```
 
 **Functions to leave on a slide** (all three were shown in segment 1):
@@ -251,7 +260,7 @@ import boxes
 
 boxes.setup(100, sorted=True)
 boxes.show_title("Binary search")
-target = boxes.random_value()
+target = boxes.pick_target_value()
 boxes.show_target(target)
 boxes.wait_for_start()
 
@@ -273,6 +282,8 @@ if found_index == -1:
 else:
     boxes.highlight_box(found_index)
     print("Found", target, "in box", found_index)
+
+boxes.done()
 ```
 
 **Make this mistake on purpose:** first write `low = mid` instead of
@@ -303,6 +314,8 @@ binary_count = boxes.num_opened()
 
 print("Linear search opened", linear_count, "boxes")
 print("Binary search opened", binary_count, "boxes")
+
+boxes.done()
 ```
 
 **Do:** Fill in the binary column of the board table:

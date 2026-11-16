@@ -35,8 +35,8 @@ Run your program a few times. Does binary search always win?
 import boxes
 
 boxes.setup(100, sorted=True)
-boxes.set_speed(10)             # 100 boxes is a lot, so open them quickly
-target = boxes.random_value()   # a number that is in one of the boxes
+boxes.set_speed(10)                  # 100 boxes is a lot, so open them quickly
+target = boxes.pick_target_value()   # a number that is in one of the boxes
 boxes.show_target(target)
 
 boxes.show_title("Linear search")
@@ -53,3 +53,6 @@ boxes.show_title("Binary search")
 
 
 # TODO 3: print linear_count and binary_count
+
+
+boxes.done()   # keep the window open and show the Restart button

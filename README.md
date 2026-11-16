@@ -131,6 +131,8 @@ presentation.
 - Read this textbook chapter: **none**
 - Review these lecture notes: [linear search](lecture_notes/chapter_algorithms/alg1_linear_search/alg1_linear_search.ipynb), [binary search](lecture_notes/chapter_algorithms/alg2_binary_search/alg2_binary_search.ipynb)
 - [Lecture examples](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures)
+  - [lecture 23 examples](lectures/lecture23/)
+  - [lecture 24 examples](lectures/lecture24/)
 - Practice problems:
   - [linear search](lecture_notes/chapter_algorithms/alg1_linear_search/linear_search_exercises_start.py) ([solutions](lecture_notes/chapter_algorithms/alg1_linear_search/linear_search_exercises_sol.py))
   - [binary search](lecture_notes/chapter_algorithms/alg2_binary_search/binary_search_exercises_start.py) ([solutions](lecture_notes/chapter_algorithms/alg2_binary_search/binary_search_exercises_sol.py))

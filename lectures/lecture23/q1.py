@@ -1,37 +1,46 @@
 # q1.py
 
 """
-Each box in the window hides a number. The only way to find out what is in a
-box is to open it by calling boxes.open_box(i), which returns the number
-inside box i. The first box is box 0.
+Write a program that asks the user for the following information:
 
-Write a program that finds which box the target number is in using *linear
-search*: open the boxes one at a time, starting at box 0, until you find the
-target. Then stop opening boxes, highlight the box the target is in, and print
-its index.
+- the name of a file they would like to create
+- a list of names they would like to appear in the file, e.g. the user might
+  enter the five names "Ava Ben Cara Dana Evan"
+- ask for how many names they want in the file
 
-These functions will help:
+After getting this information, the program should create a file with the given
+name and then fill it with random names (from the user's list) until the file
+contains the specified number of names. Each name should be on its own line.
 
-- boxes.open_box(i) opens box i and returns the number inside it
-- boxes.num_boxes() returns how many boxes there are
-- boxes.highlight_box(i) colours box i green
+Hint: import the random module, and use random.choice() to select random names
+from the list.
 
-Sample Run (your numbers will be different)
+Sample Run
 
 ```
-Found 64 in box 6
+What file? votes.txt
+What names? Ava Ben Cara Dana Evan 
+How many names in the file? 100
+
+Okay, created votes.txt with 100 random names.
 ```
 
-When your program is working, run it a few times and watch the "Boxes opened"
-counter. What is the smallest it could ever be? What is the largest?
+Now the file votes.txt should exist and contain 100 random names, e.g. starting
+like this:
+
+```
+Dana
+Dana
+Ava
+Cara
+Evan
+Ava
+Evan
+Ben
+Ava
+Ava
+...
+```
+
+There should be exactly 100 names in random order.
 """
-import boxes
-
-boxes.setup(10)
-boxes.show_title("Linear search")
-target = boxes.random_value()   # a number that is in one of the boxes
-boxes.show_target(target)
-boxes.wait_for_start()
-
-# TODO: open the boxes one at a time, starting at box 0, until you find
-# target. Highlight the box it is in, and print its index.

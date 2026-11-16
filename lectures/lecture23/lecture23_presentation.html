@@ -231,273 +231,159 @@
 <script type="text/plain" class="qfile" data-id="q1" data-file="q1_sol.py" data-label="Q1">
 ## Question
 
-Each box in the window hides a number. The only way to find out what is in a
-box is to open it by calling boxes.open_box(i), which returns the number
-inside box i. The first box is box 0.
+Write a program that asks the user for the following information:
 
-Write a program that finds which box the target number is in using *linear
-search*: open the boxes one at a time, starting at box 0, until you find the
-target. Then stop opening boxes, highlight the box the target is in, and print
-its index.
+- the name of a file they would like to create
+- a list of names they would like to appear in the file, e.g. the user might
+  enter the five names "Ava Ben Cara Dana Evan"
+- ask for how many names they want in the file
 
-These functions will help:
+After getting this information, the program should create a file with the given
+name and then fill it with random names (from the user's list) until the file
+contains the specified number of names. Each name should be on its own line.
 
-- boxes.open_box(i) opens box i and returns the number inside it
-- boxes.num_boxes() returns how many boxes there are
-- boxes.highlight_box(i) colours box i green
+Hint: import the random module, and use random.choice() to select random names
+from the list.
 
-Sample Run (your numbers will be different)
+Sample Run
 
 ```
-Found 64 in box 6
+What file? votes.txt
+What names? Ava Ben Cara Dana Evan 
+How many names in the file? 100
+
+Okay, created votes.txt with 100 random names.
 ```
 
-When your program is working, run it a few times and watch the "Boxes opened"
-counter. What is the smallest it could ever be? What is the largest?
+Now the file votes.txt should exist and contain 100 random names, e.g. starting
+like this:
+
+```
+Dana
+Dana
+Ava
+Cara
+Evan
+Ava
+Evan
+Ben
+Ava
+Ava
+...
+```
+
+There should be exactly 100 names in random order.
 
 ## Sample Solution
 
 ```python
-import boxes
+import random
 
-boxes.setup(10)
-boxes.show_title("Linear search")
-target = boxes.random_value()   # a number that is in one of the boxes
-boxes.show_target(target)
-boxes.wait_for_start()
+#
+# get the information from the user
+#
+file_name = input("What file? ")
+names = input("What names? ").split() # split() chops a string into a list
+num_names = int(input("How many names in the file? "))
 
-found_index = -1    # -1 means "not found yet"
-i = 0
-while i < boxes.num_boxes() and found_index == -1:
-    value = boxes.open_box(i)
-    if value == target:
-        found_index = i
-    i += 1
+#
+# open the file and write the random names to it
+#
+name_file = open(file_name, 'w') # 'w' opens the file for writing
+for i in range(num_names):
+    rand_name = random.choice(names) # choose a random name from the list
+    name_file.write(rand_name + '\n') # write the name, then a newline
 
-boxes.highlight_box(found_index)
-print("Found", target, "in box", found_index)
-
-# The smallest the counter could be is 1 (the target is in box 0). The largest
-# is 10 (the target is in the last box).
+#
+# close file and print a message to the user
+#
+name_file.close()
+print(f"Okay, created {file_name} with {num_names} random names.")
 ```
 </script>
 
 <script type="text/plain" class="qfile" data-id="q2" data-file="q2_sol.py" data-label="Q2">
 ## Question
 
-What happens if the target is not in any of the boxes?
+The student council president election has five candidates: Ava, Ben, Cara,
+Dana, and Evan. The file votes.txt contains all the votes cast, one per line.
+Any name other than one of these five candidates is invalid and counts as a
+spoiled vote.
 
-The numbers hidden in the boxes are always 1 or bigger, so 0 is never in a
-box. The program below is the linear search from q1, but with the target
-changed to 0. Run it and see what goes wrong.
+Write a program that reads the votes from votes.txt and counts how many votes
+each candidate received, and then prints out the results from most votes to
+least votes. Also include the number of spoiled votes. If there is a tie, then
+order doesn't matter.
 
-Fix the program so that it works whether or not the target is in a box:
-
-- if the target is in a box, highlight the box and print its index (as before)
-- if the target is not in any box, print a message saying so
-
-Sample Run (target is 0)
-
-```
-0 is not in any box
-```
-
-Sample Run (target is in a box; your numbers will be different)
+For example, suppose votes.txt contains this:
 
 ```
-Found 64 in box 6
+Cara
+Dana
+Ava
+Dana
+Ben
+Carl
+Ben
+Ben
+Ava
+Scooby
+Ben
 ```
 
-Test your program both ways: with target = 0, and with
-target = boxes.random_value().
+Then the program should print:
 
-How many boxes does linear search open when the target is not there?
+```
+Ben: 4
+Dana: 2
+Ava: 2
+Cara: 1
+Evan: 0
+Spoiled votes: 2
+```
 
 ## Sample Solution
 
 ```python
-import boxes
+#
+# initialize all the counts to 0
+#
+votes = {'Ava': 0, 'Ben': 0, 'Cara': 0, 'Dana': 0, 'Evan': 0}
+spoiled_votes = 0
 
-boxes.setup(10)
-boxes.show_title("Linear search")
-target = 0   # 0 is never in a box
-boxes.show_target(target)
-boxes.wait_for_start()
-
-found_index = -1    # -1 means "not found yet"
-i = 0
-while i < boxes.num_boxes() and found_index == -1:
-    value = boxes.open_box(i)
-    if value == target:
-        found_index = i
-    i += 1
-
-if found_index == -1:
-    print(target, "is not in any box")
-else:
-    boxes.highlight_box(found_index)
-    print("Found", target, "in box", found_index)
-
-# When the target is not there, linear search opens every box (10 here): it
-# has to check them all to be sure.
-```
-</script>
-
-<script type="text/plain" class="qfile" data-id="q3" data-file="q3_sol.py" data-label="Q3">
-## Question
-
-There are 100 boxes, and the numbers in them are in *sorted order*, from
-smallest (box 0) to largest (box 99).
-
-Write a program that finds which box the target number is in using *binary
-search*. The idea of binary search is as follows:
-
-- use two variables, low and high, to keep track of the range of boxes where the
-  target could be
-
-- initially, the target could be in any of the 100 boxes, so start with low = 0
-  and high = 99
-
-- open the box in the middle of low and high, and check if it contains the
-  target; there are three possibilities: 
-  
-  1. the target is in the box, you're done
-  
-  2. the target is less than the number in the box, so it must be in a box to
-     the left of the middle box; so change high to the box before the middle
-
-  3. the target is greater than the number in the box, so it must be in a box to
-     the *right* of the current box, so change low to the box after the current
-     box
-
-- if after doing the above, there are still boxes left that the target could be
-  in, then repeat the process with the new range of boxes
-
-- if instead there are no boxes left that the target could be in, then the
-  target is not in any box. and you are done
-
-Write code that implements the above algorithm. Highlight the box the target is
-in and print its index, or print a message if the target is not in any box.
-
-## Sample Solution
-
-```python
-import boxes
-
-boxes.setup(100, sorted=True)
-boxes.show_title("Binary search")
-target = boxes.random_value()   # a number that is in one of the boxes
-boxes.show_target(target)
-boxes.wait_for_start()
-
-low = 0
-high = boxes.num_boxes() - 1
-found_index = -1    # -1 means "not found yet"
-while low <= high and found_index == -1:
-    mid = (low + high) // 2
-    value = boxes.open_box(mid)
-    if value == target:
-        found_index = mid
-    elif value < target:
-        low = mid + 1     # target must be to the right of box mid
+#
+# open the file and read the names (one per line)
+#
+print("Reading votes from votes.txt...")
+vote_file = open("votes.txt", 'r') # open the file for reading
+for name in vote_file:
+    name = name.strip() # remove whitespace from the name
+    if name in votes:
+        votes[name] += 1 # increment the count for this candidate
     else:
-        high = mid - 1    # target must be to the left of box mid
+        spoiled_votes += 1 # increment the count for spoiled votes
 
-if found_index == -1:
-    print(target, "is not in any box")
-else:
-    boxes.highlight_box(found_index)
-    print("Found", target, "in box", found_index)
-    print("Binary search opened", boxes.num_opened(), "boxes")
+#
+# make list of pairs of [count, name] so we can sort them
+#
+name_vote = []
+for name in votes:
+    pair = [votes[name], name] # create a pair of [count, name]
+    name_vote.append(pair)     # add it to the end of the list of all pairs
+    
+# .sort() sorts the list of pairs from least votes to most votes
+name_vote.sort()
+print('name_vote:', name_vote)
 
-# With 100 boxes, binary search never opens more than 7 boxes.
-```
-</script>
+# reverse the order so they go from most votes to least votes
+name_vote.reverse() 
 
-<script type="text/plain" class="qfile" data-id="q4" data-file="q4_sol.py" data-label="Q4">
-## Question
-
-A race between linear search and binary search!
-
-There are 100 boxes with their numbers in sorted order. Search for the same
-target twice:
-
-1. First use linear search (as in q2). When it finishes, save the number of
-   boxes it opened in a variable called linear_count.
-
-2. Then wait for the Next button to be clicked (so there is time to look at
-   what linear search did), close all the boxes, and use binary search (as
-   in q3). When it finishes, save the number of boxes it opened in a variable
-   called binary_count.
-
-Finally, print both counts.
-
-These functions will help:
-
-- boxes.num_opened() returns the number of boxes opened so far
-- boxes.close_all() closes all the boxes and sets the counter back to 0
-- boxes.show_title(title) shows a title at the top of the window
-- boxes.wait_for_button("Next") shows a Next button and waits for a click
-
-Sample Run (your numbers will be different)
-
-```
-Linear search opened 75 boxes
-Binary search opened 4 boxes
-```
-
-Run your program a few times. Does binary search always win?
-
-## Sample Solution
-
-```python
-import boxes
-
-boxes.setup(100, sorted=True)
-boxes.set_speed(10)             # 100 boxes is a lot, so open them quickly
-target = boxes.random_value()   # a number that is in one of the boxes
-boxes.show_target(target)
-
-boxes.show_title("Linear search")
-boxes.wait_for_start()
-
-# Linear search
-found_index = -1    # -1 means "not found yet"
-i = 0
-while i < boxes.num_boxes() and found_index == -1:
-    value = boxes.open_box(i)
-    if value == target:
-        found_index = i
-    i += 1
-boxes.highlight_box(found_index)
-linear_count = boxes.num_opened()
-
-boxes.wait_for_button("Next")   # pause so the linear search result can be seen
-boxes.close_all()
-boxes.show_title("Binary search")
-
-# Binary search
-low = 0
-high = boxes.num_boxes() - 1
-found_index = -1
-while low <= high and found_index == -1:
-    mid = (low + high) // 2
-    value = boxes.open_box(mid)
-    if value == target:
-        found_index = mid
-    elif value < target:
-        low = mid + 1     # target must be to the right of box mid
-    else:
-        high = mid - 1    # target must be to the left of box mid
-boxes.highlight_box(found_index)
-binary_count = boxes.num_opened()
-
-print("Linear search opened", linear_count, "boxes")
-print("Binary search opened", binary_count, "boxes")
-
-# Binary search doesn't always win. If the target is in one of the first few
-# boxes, linear search finds it in fewer opens. But linear search can need as
-# many as 100 opens, while binary search never needs more than 7.
+#
+# print the results
+#
+for count, name in name_vote:
+    print(f"{name}: {count}")
+print(f"Spoiled votes: {spoiled_votes}")
 ```
 </script>
 

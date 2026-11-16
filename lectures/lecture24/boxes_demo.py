@@ -9,7 +9,7 @@ import boxes
 
 boxes.setup(10)
 boxes.show_title("Linear search")
-target = boxes.random_value()
+target = boxes.pick_target_value()
 boxes.show_target(target)
 boxes.wait_for_start()
 print("Searching for", target)
@@ -25,3 +25,5 @@ while i < boxes.num_boxes() and found_index == -1:
 boxes.highlight_box(found_index)
 print("Found", target, "in box", found_index)
 print("Boxes opened:", boxes.num_opened())
+
+boxes.done()   # keep the window open and show the Restart button

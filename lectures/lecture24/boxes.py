@@ -19,10 +19,11 @@ Typical use:
     boxes.setup(10)             # 10 boxes, numbers in random order
     value = boxes.open_box(0)   # open the first box and get its number
     print(value)
+    boxes.done()                # keep the window open, show Restart button
 
-When your program reaches its end, the window stays open and a Restart
-button appears. Clicking Restart runs your program again from the beginning.
-Close the window to finish.
+Call boxes.done() on the last line of your program. It keeps the window open
+and shows a Restart button. Clicking Restart runs your program again from the
+beginning. Close the window to finish.
 
 Use boxes.setup(10, sorted=True) to put the numbers in order from smallest
 to largest.
@@ -33,7 +34,6 @@ boxes they go higher: up to 199 for 20 boxes, and up to 999 for 100 boxes.
 0 and negative numbers are never in a box.
 """
 
-import atexit
 import os
 import random
 import runpy
@@ -60,7 +60,7 @@ _button_pen = None    # turtle that draws the Start and Restart buttons
 _button_clicked = False
 _main_file = None     # the file name of the program that is using this module
 _canvas = None        # the window's drawing area, used to check it's still open
-_exit_registered = False
+_done_running = False  # True while done() is showing the Restart button
 
 # Layout (calculated in setup)
 _box_size = 60
@@ -108,7 +108,7 @@ def setup(n=10, sorted=False, values=None):
     """
     global _values, _is_open, _is_highlighted, _num_opened, _has_target
     global _title
-    global _box_pens, _counter_pen, _button_pen, _canvas, _exit_registered
+    global _box_pens, _counter_pen, _button_pen, _canvas
     global _main_file
 
     if values is not None:
@@ -144,13 +144,12 @@ def setup(n=10, sorted=False, values=None):
     turtle.title("Boxes")
     turtle.tracer(0, 0)  # no screen updates until turtle.update()
     _canvas = turtle.getcanvas()
-    if not _exit_registered:
-        # When the program finishes, keep the window open until it is closed
+    if _main_file is None:
+        # Remember which program is using this module, so that done() can
+        # run it again when Restart is clicked
         _main_file = getattr(sys.modules.get("__main__"), "__file__", None)
         if _main_file is not None:
             _main_file = os.path.abspath(_main_file)
-        atexit.register(_keep_window_open)
-        _exit_registered = True
 
     # The line saying what order the numbers are in never changes, and
     # neither do the index numbers under the boxes, so draw them once
@@ -264,12 +263,12 @@ def num_opened():
     return _num_opened
 
 
-def random_value():
+def pick_target_value():
     """
     Return a number that is hidden in one of the boxes, chosen at random.
     Useful for picking a target to search for.
     """
-    _check_setup("random_value")
+    _check_setup("pick_target_value")
     return random.choice(_values)
 
 
@@ -312,15 +311,35 @@ def set_speed(speed):
     _speed = speed
 
 
+def done():
+    """
+    Call this on the last line of your program. It keeps the window open and
+    shows a Restart button. Clicking Restart runs your program again from
+    the beginning. Close the window to finish.
+    """
+    global _done_running
+    _check_setup("done")
+    if _done_running:
+        # Restart is running the program again, and it has reached its last
+        # line. Go back to the first call of done(), which is still waiting
+        # and will show the Restart button again.
+        return
+    _done_running = True
+    try:
+        _keep_window_open()
+    finally:
+        _done_running = False
+
+
 #
 # Helper functions (not meant to be called from outside this module)
 #
 
 def _keep_window_open():
     """
-    Called automatically when the program ends. Shows a Restart button and
-    waits. If Restart is clicked, the program is run again from the
-    beginning. This repeats until the user closes the window.
+    Called by done(). Shows a Restart button and waits. If Restart is
+    clicked, the program is run again from the beginning. This repeats
+    until the user closes the window.
     """
     while True:
         try:

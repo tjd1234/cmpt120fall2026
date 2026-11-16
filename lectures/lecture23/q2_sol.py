@@ -1,55 +1,79 @@
 # q2_sol.py
 
 """
-What happens if the target is not in any of the boxes?
+The student council president election has five candidates: Ava, Ben, Cara,
+Dana, and Evan. The file votes.txt contains all the votes cast, one per line.
+Any name other than one of these five candidates is invalid and counts as a
+spoiled vote.
 
-The numbers hidden in the boxes are always 1 or bigger, so 0 is never in a
-box. The program below is the linear search from q1, but with the target
-changed to 0. Run it and see what goes wrong.
+Write a program that reads the votes from votes.txt and counts how many votes
+each candidate received, and then prints out the results from most votes to
+least votes. Also include the number of spoiled votes. If there is a tie, then
+order doesn't matter.
 
-Fix the program so that it works whether or not the target is in a box:
-
-- if the target is in a box, highlight the box and print its index (as before)
-- if the target is not in any box, print a message saying so
-
-Sample Run (target is 0)
-
-```
-0 is not in any box
-```
-
-Sample Run (target is in a box; your numbers will be different)
+For example, suppose votes.txt contains this:
 
 ```
-Found 64 in box 6
+Cara
+Dana
+Ava
+Dana
+Ben
+Carl
+Ben
+Ben
+Ava
+Scooby
+Ben
 ```
 
-Test your program both ways: with target = 0, and with
-target = boxes.random_value().
+Then the program should print:
 
-How many boxes does linear search open when the target is not there?
+```
+Ben: 4
+Dana: 2
+Ava: 2
+Cara: 1
+Evan: 0
+Spoiled votes: 2
+```
 """
-import boxes
+#
+# initialize all the counts to 0
+#
+votes = {'Ava': 0, 'Ben': 0, 'Cara': 0, 'Dana': 0, 'Evan': 0}
+spoiled_votes = 0
 
-boxes.setup(10)
-boxes.show_title("Linear search")
-target = 0   # 0 is never in a box
-boxes.show_target(target)
-boxes.wait_for_start()
+#
+# open the file and read the names (one per line)
+#
+print("Reading votes from votes.txt...")
+vote_file = open("votes.txt", 'r') # open the file for reading
+for name in vote_file:
+    name = name.strip() # remove whitespace from the name
+    if name in votes:
+        votes[name] += 1 # increment the count for this candidate
+    else:
+        spoiled_votes += 1 # increment the count for spoiled votes
 
-found_index = -1    # -1 means "not found yet"
-i = 0
-while i < boxes.num_boxes() and found_index == -1:
-    value = boxes.open_box(i)
-    if value == target:
-        found_index = i
-    i += 1
+#
+# make list of pairs of [count, name] so we can sort them
+#
+name_vote = []
+for name in votes:
+    pair = [votes[name], name] # create a pair of [count, name]
+    name_vote.append(pair)     # add it to the end of the list of all pairs
+    
+# .sort() sorts the list of pairs from least votes to most votes
+name_vote.sort()
+print('name_vote:', name_vote)
 
-if found_index == -1:
-    print(target, "is not in any box")
-else:
-    boxes.highlight_box(found_index)
-    print("Found", target, "in box", found_index)
+# reverse the order so they go from most votes to least votes
+name_vote.reverse() 
 
-# When the target is not there, linear search opens every box (10 here): it
-# has to check them all to be sure.
+#
+# print the results
+#
+for count, name in name_vote:
+    print(f"{name}: {count}")
+print(f"Spoiled votes: {spoiled_votes}")

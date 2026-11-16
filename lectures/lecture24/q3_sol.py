@@ -1,4 +1,4 @@
-# q3.py
+# q3_sol.py
 
 """
 There are 100 boxes, and the numbers in them are in *sorted order*, from
@@ -11,7 +11,7 @@ search*. The idea of binary search is as follows:
   target could be
 
 - initially, the target could be in any of the 100 boxes, so start with low = 0
-  and high = boxes.num_boxes() - 1
+  and high = 99
 
 - open the box in the middle of low and high, and check if it contains the
   target; there are three possibilities: 
@@ -33,45 +33,35 @@ search*. The idea of binary search is as follows:
 
 Write code that implements the above algorithm. Highlight the box the target is
 in and print its index, or print a message if the target is not in any box.
-
-Sample Run (your numbers will be different)
-
-```
-Found 780 in box 74
-```
-
-Sample Run (target is 0)
-
-```
-0 is not in any box
-```
-
-Watch the "Boxes opened" counter. What is the largest it ever gets?
 """
 import boxes
 
 boxes.setup(100, sorted=True)
 boxes.show_title("Binary search")
-target = boxes.random_value()   # a number that is in one of the boxes
+target = boxes.pick_target_value()   # a number that is in one of the boxes
 boxes.show_target(target)
 boxes.wait_for_start()
 
 low = 0
 high = boxes.num_boxes() - 1
 found_index = -1    # -1 means "not found yet"
-
-# TODO: write a while-loop that does the binary search. Each time through the
-# loop it should:
-#
-# - set mid to the index of the box in the middle of low and high; use
-#   (low + high) // 2
-# - open box mid
-# - compare the number in that box to target, and then either set
-#   found_index, or change low, or change high
-
+while low <= high and found_index == -1:
+    mid = (low + high) // 2
+    value = boxes.open_box(mid)
+    if value == target:
+        found_index = mid
+    elif value < target:
+        low = mid + 1     # target must be to the right of box mid
+    else:
+        high = mid - 1    # target must be to the left of box mid
 
 if found_index == -1:
     print(target, "is not in any box")
 else:
     boxes.highlight_box(found_index)
     print("Found", target, "in box", found_index)
+    print("Binary search opened", boxes.num_opened(), "boxes")
+
+boxes.done()   # keep the window open and show the Restart button
+
+# With 100 boxes, binary search never opens more than 7 boxes.

@@ -29,5 +29,6 @@ boxes.highlight_box(3)
 print("Number of boxes:", boxes.num_boxes())
 print("Boxes opened:", boxes.num_opened())
 
-# When the program ends, the window stays open and a Restart button appears.
-# Click Restart to run the program again, or close the window to finish.
+# Keep the window open and show a Restart button. Click Restart to run the
+# program again, or close the window to finish.
+boxes.done()
