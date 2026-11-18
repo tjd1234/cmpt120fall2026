@@ -64,25 +64,18 @@ boxes. Just write linear search in the part where the comments say.
 
 ### Questions
 
-1. For n=10 boxes, what is the smallest number of boxes linear search might
-   open?
-
-2. For n=10 boxes, what is the largest number of boxes linear search might open?
-
-3. For n=10 boxes, what is the average number of boxes linear search might open?
+1. For n=10 boxes, what is the smallest, largest, and average number of boxes
+   linear search might open?
 
 ## Part 3: More Boxes
 
-Test your program with n=100 boxes. You can use `set_speed(speed)` make it go faster: `speed` 1 is the slowest, and `speed` 10 is the fastest.
+Test your program with n=100 boxes. You can use `set_speed(speed)` make it go
+faster: `speed` 1 is the slowest, and `speed` 10 is the fastest.
 
 ### Questions
 
-4. For n=100 boxes, what is the smallest number of boxes linear search might
-   open?
-5. For n=100 boxes, what is the largest number of boxes linear search might
-   open?
-6. For n=100 boxes, what is the average number of boxes linear search might
-   open?
+2. For n=100 boxes, what is the smallest, largest, and average number of boxes
+   linear search might open?
 
 ## Part 4: Searching for a Value that is Not in the Boxes
 
@@ -91,12 +84,9 @@ not be in any of the boxes.
 
 ### Questions
 
-7. For n=100 boxes, what is the smallest number of boxes linear search might
-   open?
-8. For n=100 boxes, what is the largest number of boxes linear search might
-   open?
-9. For n=100 boxes, what is the average number of boxes linear search might
-   open?
-10. Suppose you are using linear search to search n boxes, and there is a 50%
+3. For n=100 boxes, what is the smallest, largest, and average number of boxes
+   linear search might open?
+
+4. Suppose you are using linear search to search n boxes, and there is a 50%
     chance that the target value is in one of the boxes. What is the average
     number of boxes you would expect linear search to open?
