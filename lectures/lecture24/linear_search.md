@@ -2,7 +2,6 @@
 
 ## Part 1: The Linear Search Algorithm
 
-In this activity we are going to explore the important algorithm **linear search**.
 Linear search is a simple and very general algorithm that can find a target
 value among group of other values.
 
@@ -62,8 +61,6 @@ boxes.
 Don't change any of the given code that sets up the window and displays the
 boxes. Just write linear search in the part where the comments say. 
 
-### Questions
-
 1. For n=10 boxes, what is the smallest, largest, and average number of boxes
    linear search might open?
 
@@ -72,8 +69,6 @@ boxes. Just write linear search in the part where the comments say.
 Test your program with n=100 boxes. You can use `set_speed(speed)` make it go
 faster: `speed` 1 is the slowest, and `speed` 10 is the fastest.
 
-### Questions
-
 2. For n=100 boxes, what is the smallest, largest, and average number of boxes
    linear search might open?
 
@@ -81,8 +76,6 @@ faster: `speed` 1 is the slowest, and `speed` 10 is the fastest.
 
 Modify your program to search for the target value -1, which is guaranteed to
 not be in any of the boxes.
-
-### Questions
 
 3. For n=100 boxes, what is the smallest, largest, and average number of boxes
    linear search might open?
