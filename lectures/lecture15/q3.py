@@ -1,8 +1,6 @@
 # q3.py
 
 """
-# q4_sol.py
-
 During wildfire season, air quality is reported using the Air Quality Health
 Index (AQHI). Here's a simplified version of the advice for strenuous outdoor
 activity:

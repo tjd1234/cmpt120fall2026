@@ -13,6 +13,7 @@
     --accent-dark: #1d4ed8;
     --done: #16a34a;
     --border: #d8dce3;
+    --text-scale: 1;   /* changed by the - and + keys */
   }
   * { box-sizing: border-box; }
   body {
@@ -89,18 +90,27 @@
   }
   .placeholder {
     text-align: center;
-    font-size: 1.6rem;
+    font-size: calc(1.6rem * var(--text-scale));
     color: #888;
     margin-top: 80px;
   }
+  .question-block.intro-block { font-weight: 400; }
+  .placeholder.intro-start { margin-top: 30px; }
   .question-block {
-    font-size: 2.1rem;
+    font-size: calc(2.1rem * var(--text-scale));
     font-weight: 700;
     line-height: 1.5;
     text-align: left;
   }
   .question-block p { margin: 0 0 0.7em; }
-  .question-block ul { margin: 0.5em 0 0.9em 1.4em; }
+  .question-block ul, .question-block ol { margin: 0.5em 0 0.9em 1.4em; padding-left: 0.6em; }
+  .question-block .md-heading { margin: 0.4em 0 0.4em; line-height: 1.25; }
+  .question-block h1.md-heading { font-size: 1.35em; }
+  .question-block h2.md-heading { font-size: 1.2em; }
+  .question-block h3.md-heading, .question-block h4.md-heading,
+  .question-block h5.md-heading, .question-block h6.md-heading { font-size: 1.05em; }
+  .question-block img, .answer-panel img { max-width: 100%; height: auto; }
+  .question-block a, .answer-panel a { color: var(--accent); }
   .question-block li { margin-bottom: 0.3em; }
   .question-block pre {
     background: #1e1e2e;
@@ -108,7 +118,7 @@
     padding: 18px 22px;
     border-radius: 10px;
     overflow-x: auto;
-    font-size: 1.2rem;
+    font-size: calc(1.2rem * var(--text-scale));
     font-weight: 400;
   }
   .question-block code {
@@ -155,13 +165,13 @@
     background: #fffbe6;
     border: 2px solid #f2d675;
     border-radius: 12px;
-    font-size: 1.5rem;
+    font-size: calc(1.5rem * var(--text-scale));
     line-height: 1.5;
   }
   .answer-panel.visible { display: block; }
   .answer-panel h2 {
     margin-top: 0;
-    font-size: 1.1rem;
+    font-size: calc(1.1rem * var(--text-scale));
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #92700f;
@@ -172,7 +182,7 @@
     padding: 16px 20px;
     border-radius: 10px;
     overflow-x: auto;
-    font-size: 1.15rem;
+    font-size: calc(1.15rem * var(--text-scale));
   }
   .answer-panel code {
     background: #eee0b0;
@@ -184,6 +194,10 @@
     font-style: italic;
     color: #888;
   }
+  .no-solution-note {
+    align-self: center;
+    font-size: 1.15rem;
+  }
   .file-tag {
     font-size: 0.85rem;
     color: #999;
@@ -191,6 +205,19 @@
     margin-bottom: 20px;
   }
   sup, sub { font-size: 0.7em; }
+  .key-hint {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #999;
+    padding: 12px 20px 0;
+  }
+  .key-hint kbd {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    background: var(--panel);
+    font-family: inherit;
+  }
 </style>
 </head>
 <body>
@@ -198,9 +225,14 @@
   <h1>Lecture 14 Practice Questions</h1>
   <div class="question-nav" id="questionNav"></div>
 </header>
+<div class="key-hint">
+  Keys: <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next question &nbsp;&middot;&nbsp;
+  <kbd>Space</kbd> show / hide answer &nbsp;&middot;&nbsp;
+  <kbd>&minus;</kbd> <kbd>+</kbd> smaller / bigger text
+</div>
 <main>
   <div class="stage" id="stage">
-    <div class="placeholder">Select a question above to display it.</div>
+    <div class="placeholder">Select a question above (or press &rarr;) to display it.</div>
   </div>
 </main>
 
@@ -431,6 +463,10 @@ function loadQuestionsFromPage() {
 
 const QUESTIONS = loadQuestionsFromPage();
 
+// The lecture's intro.md text, if it has one, shown as the opening screen.
+const introBlock = document.getElementById('introText');
+const INTRO = introBlock ? introBlock.textContent.trim() : '';
+
 const DONE_KEY = 'presentationAI_done_lecture14-presentation';
 function loadDone() {
   try {
@@ -452,7 +488,20 @@ function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
+function safeUrl(url) {
+  // links and images may only point at files or web pages, not run scripts
+  return /^\s*javascript:/i.test(url) ? '#' : url.replace(/"/g, '&quot;');
+}
+
+// Inline Markdown (text is already HTML-escaped): `code`, **bold**,
+// *italics*, [links](file.py), ![images](picture.png), and $x^2$ / $x_1$.
 function renderInlineMarkup(text) {
+  // set code spans aside first, so nothing inside them is changed
+  const codeSpans = [];
+  text = text.replace(/`([^`]+)`/g, function(_, code) {
+    codeSpans.push('<code>' + code + '</code>');
+    return '\u0000' + (codeSpans.length - 1) + '\u0000';
+  });
   text = text.replace(/\$([^$]+)\$/g, function(_, inner) {
     let out = inner;
     out = out.replace(/\^\{([^}]+)\}/g, '<sup>$1</sup>');
@@ -461,9 +510,29 @@ function renderInlineMarkup(text) {
     out = out.replace(/_([A-Za-z0-9])/g, '<sub>$1</sub>');
     return out;
   });
-  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+  text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function(_, alt, src) {
+    return '<img src="' + safeUrl(src) + '" alt="' + alt.replace(/"/g, '&quot;') + '">';
+  });
+  text = text.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function(_, label, url) {
+    return '<a href="' + safeUrl(url) + '">' + label + '</a>';
+  });
   text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  // *italics* only when the stars aren't inside a word, so 2*3*4 is left alone
+  text = text.replace(/(^|[^\w*])\*([^*\s](?:[^*]*?[^*\s])?)\*(?![\w*])/g, '$1<em>$2</em>');
+  text = text.replace(/\u0000(\d+)\u0000/g, function(_, i) { return codeSpans[i]; });
   return text;
+}
+
+// An <img ...> line in the Markdown, rebuilt with only its src, alt, and
+// width attributes (so no other HTML gets into the page).
+function renderImgTag(attrText) {
+  const attrs = {};
+  attrText.replace(/(\w+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g, function(_, name, v1, v2) {
+    attrs[name.toLowerCase()] = v1 !== undefined ? v1 : v2;
+  });
+  let tag = '<img src="' + safeUrl(attrs.src || '') + '" alt="' + (attrs.alt || '').replace(/"/g, '&quot;') + '"';
+  if (/^\d+(%|px)?$/.test(attrs.width || '')) tag += ' width="' + attrs.width + '"';
+  return '<p>' + tag + '></p>';
 }
 
 function renderMarkdownLite(md) {
@@ -478,7 +547,9 @@ function renderMarkdownLite(md) {
     // its own, even if the question has no blank line before or after it
     return '\n\n@@CODEBLOCK' + idx + '@@\n\n';
   });
-  const blocks = placeholderText.split(/\n\s*\n/);
+  // headings and <img> lines are blocks of their own
+  const separated = placeholderText.replace(/^([ \t]*(?:#{1,6}[ \t]+.*|<img\b[^>]*>)[ \t]*)$/gim, '\n\n$1\n\n');
+  const blocks = separated.split(/\n\s*\n/);
   let html = '';
   for (const block of blocks) {
     const trimmed = block.trim();
@@ -488,26 +559,39 @@ function renderMarkdownLite(md) {
       html += '<pre><code>' + codeBlocks[parseInt(codeMatch[1], 10)] + '</code></pre>';
       continue;
     }
+    const headingMatch = trimmed.match(/^(#{1,6})\s+(.*?)\s*#*\s*$/);
+    if (headingMatch) {
+      const level = headingMatch[1].length;
+      html += '<h' + level + ' class="md-heading">' + renderInlineMarkup(escapeHtml(headingMatch[2])) + '</h' + level + '>';
+      continue;
+    }
+    const imgMatch = trimmed.match(/^<img\b([^>]*)>$/i);
+    if (imgMatch) {
+      html += renderImgTag(imgMatch[1]);
+      continue;
+    }
     const lines = trimmed.split('\n');
-    if (/^\s*-\s+/.test(lines[0])) {
-      // Group lines into bullet items: a line starting with "- " begins a
-      // new item; any other line (e.g. an indented wrapped continuation of
-      // the previous item's text) is appended to the current item instead
-      // of being mistaken for a non-list paragraph.
+    const listItem = /^\s*([-*]|\d+[.)])\s+(.*)/;
+    const first = lines[0].match(listItem);
+    if (first) {
+      // Group lines into list items: a line starting with "- ", "* ", or
+      // "1. " begins a new item; any other line (e.g. an indented wrapped
+      // continuation of the previous item's text) is appended to the
+      // current item instead of being mistaken for a paragraph.
       const items = [];
       lines.forEach(function(l) {
-        const m = l.match(/^\s*-\s+(.*)/);
+        const m = l.match(listItem);
         if (m) {
-          items.push(m[1]);
+          items.push(m[2]);
         } else if (items.length) {
           items[items.length - 1] += ' ' + l.trim();
-        } else {
-          items.push(l.trim());
         }
       });
-      html += '<ul>' + items.map(function(item) {
+      const numbered = /^\d/.test(first[1]);
+      const open = numbered ? '<ol start="' + parseInt(first[1], 10) + '">' : '<ul>';
+      html += open + items.map(function(item) {
         return '<li>' + renderInlineMarkup(escapeHtml(item)) + '</li>';
-      }).join('') + '</ul>';
+      }).join('') + (numbered ? '</ol>' : '</ul>');
     } else {
       const joined = trimmed.replace(/\n/g, ' ');
       html += '<p>' + renderInlineMarkup(escapeHtml(joined)) + '</p>';
@@ -519,6 +603,14 @@ function renderMarkdownLite(md) {
 function buildNav() {
   const nav = document.getElementById('questionNav');
   nav.innerHTML = '';
+  if (INTRO) {
+    const introBtn = document.createElement('button');
+    introBtn.className = 'q-btn' + (currentId === null ? ' active' : '');
+    introBtn.type = 'button';
+    introBtn.textContent = 'Intro';
+    introBtn.addEventListener('click', showIntro);
+    nav.appendChild(introBtn);
+  }
   QUESTIONS.forEach(function(q) {
     const btn = document.createElement('button');
     btn.className = 'q-btn' + (doneSet.has(q.id) ? ' done' : '') + (q.id === currentId ? ' active' : '');
@@ -553,6 +645,13 @@ function toggleDone(id) {
   if (id === currentId) renderStage();
 }
 
+function showIntro() {
+  currentId = null;
+  answerShown = false;
+  buildNav();
+  renderStage();
+}
+
 function showQuestion(id) {
   currentId = id;
   answerShown = false;
@@ -564,7 +663,12 @@ function renderStage() {
   const stage = document.getElementById('stage');
   const q = QUESTIONS.find(function(x) { return x.id === currentId; });
   if (!q) {
-    stage.innerHTML = '<div class="placeholder">Select a question above to display it.</div>';
+    if (INTRO) {
+      stage.innerHTML = '<div class="question-block intro-block">' + renderMarkdownLite(INTRO) + '</div>'
+        + '<div class="placeholder intro-start">Press &rarr; or pick a question above to start.</div>';
+    } else {
+      stage.innerHTML = '<div class="placeholder">Select a question above (or press &rarr;) to display it.</div>';
+    }
     return;
   }
   const isDone = doneSet.has(q.id);
@@ -573,23 +677,93 @@ function renderStage() {
   html += '<div class="file-tag">' + q.file + '</div>';
   html += '<div class="question-block">' + renderMarkdownLite(q.question) + '</div>';
   html += '<div class="controls">';
-  html += '<button type="button" class="action btn-answer' + (answerShown ? ' showing' : '') + '" id="answerToggle">' + (answerShown ? 'Hide Answer' : 'Show Answer') + '</button>';
+  if (hasSolution) {
+    html += '<button type="button" class="action btn-answer' + (answerShown ? ' showing' : '') + '" id="answerToggle">' + (answerShown ? 'Hide Answer' : 'Show Answer') + '</button>';
+  }
   html += '<button type="button" class="action btn-done' + (isDone ? ' active' : '') + '" id="doneToggle">' + (isDone ? '✓ Marked Done' : 'Mark as Done') + '</button>';
+  if (!hasSolution) {
+    html += '<span class="no-answer no-solution-note">Solution not posted yet.</span>';
+  }
   html += '</div>';
-  html += '<div class="answer-panel' + (answerShown ? ' visible' : '') + '" id="answerPanel">';
-  html += '<h2>Sample Solution</h2>';
-  html += hasSolution ? renderMarkdownLite(q.solution) : '<p class="no-answer">No sample solution provided for this question.</p>';
-  html += '</div>';
+  if (hasSolution) {
+    html += '<div class="answer-panel' + (answerShown ? ' visible' : '') + '" id="answerPanel">';
+    html += '<h2>Sample Solution</h2>';
+    html += renderMarkdownLite(q.solution);
+    html += '</div>';
+  }
   stage.innerHTML = html;
 
-  document.getElementById('answerToggle').addEventListener('click', function() {
-    answerShown = !answerShown;
-    renderStage();
-  });
+  if (hasSolution) {
+    document.getElementById('answerToggle').addEventListener('click', function() {
+      answerShown = !answerShown;
+      renderStage();
+    });
+  }
   document.getElementById('doneToggle').addEventListener('click', function() {
     toggleDone(q.id);
   });
 }
+
+// Text size. The - and + keys change --text-scale,
+// which the question and answer font sizes are multiplied by. The size is
+// remembered in this browser, so it stays the same for every lecture.
+const SCALE_KEY = 'presentationAI_text_scale';
+const MIN_SCALE = 0.5;
+const MAX_SCALE = 2.5;
+let textScale = 1;
+try {
+  const saved = parseFloat(localStorage.getItem(SCALE_KEY));
+  if (saved >= MIN_SCALE && saved <= MAX_SCALE) textScale = saved;
+} catch (e) {}
+
+function setTextScale(scale) {
+  textScale = Math.round(Math.min(Math.max(scale, MIN_SCALE), MAX_SCALE) * 10) / 10;
+  document.documentElement.style.setProperty('--text-scale', textScale);
+  try { localStorage.setItem(SCALE_KEY, String(textScale)); } catch (e) {}
+}
+
+setTextScale(textScale);
+
+// Keyboard controls: left/right arrows move between questions, Space shows
+// or hides the answer, and - / + change the text size.
+function moveQuestion(step) {
+  if (QUESTIONS.length === 0) return;
+  const i = QUESTIONS.findIndex(function(x) { return x.id === currentId; });
+  let next;
+  if (INTRO && step < 0 && i <= 0) {
+    if (i === 0) showIntro();   // left from the first question goes back to the intro
+    return;
+  }
+  if (i === -1) {
+    next = step > 0 ? 0 : QUESTIONS.length - 1;  // nothing shown yet
+  } else {
+    next = Math.min(Math.max(i + step, 0), QUESTIONS.length - 1);
+  }
+  if (QUESTIONS[next].id !== currentId) showQuestion(QUESTIONS[next].id);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.altKey || e.ctrlKey || e.metaKey) return;  // leave browser shortcuts alone
+  if (e.key === 'ArrowRight') {
+    moveQuestion(1);
+  } else if (e.key === 'ArrowLeft') {
+    moveQuestion(-1);
+  } else if (e.key === ' ') {
+    const shown = QUESTIONS.find(function(x) { return x.id === currentId; });
+    if (!shown || !shown.solution) return;   // nothing to show
+    answerShown = !answerShown;
+    renderStage();
+  } else if (e.key === '-' || e.key === '_') {
+    setTextScale(textScale - 0.1);
+  } else if (e.key === '+' || e.key === '=') {
+    setTextScale(textScale + 0.1);
+  } else {
+    return;
+  }
+  // stop Space from also scrolling the page or clicking a focused button
+  e.preventDefault();
+  if (document.activeElement) document.activeElement.blur();
+});
 
 if (QUESTIONS.length === 0) {
   document.getElementById('stage').innerHTML = '<div class="placeholder">No question blocks found in this page.</div>';
