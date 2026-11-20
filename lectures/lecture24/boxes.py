@@ -140,6 +140,8 @@ def setup(n=10, sorted=False, values=None):
 
     width, height = _calculate_layout(len(_values))
     turtle.setup(width=width, height=height)
+    # Make turtle's drawing area match the window, so (0, 0) is in the centre
+    turtle.screensize(width - 12, height - 12)
     turtle.clearscreen()
     turtle.title("Boxes")
     turtle.tracer(0, 0)  # no screen updates until turtle.update()
