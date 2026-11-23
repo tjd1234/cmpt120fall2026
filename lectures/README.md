@@ -25,3 +25,4 @@ Click a lecture to see all its files, including the question files (`qN.py`) and
 | [Lecture 22](lecture22/) | [Presentation](lecture22/lecture22_presentation.html) | [Questions](lecture22/lecture22_questions.pdf) | [Solutions](lecture22/lecture22_questions_and_solutions.pdf) | [ZIP](lecture22/lecture22.zip) |
 | [Lecture 23](lecture23/) | [Presentation](lecture23/lecture23_presentation.html) | [Questions](lecture23/lecture23_questions.pdf) | [Solutions](lecture23/lecture23_questions_and_solutions.pdf) | [ZIP](lecture23/lecture23.zip) |
 | [Lecture 24](lecture24/) |  |  |  | [ZIP](lecture24/lecture24.zip) |
+| [Lecture 25](lecture25/) |  |  |  | [ZIP](lecture25/lecture25.zip) |
