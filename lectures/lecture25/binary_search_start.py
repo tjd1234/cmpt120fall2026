@@ -83,19 +83,18 @@ boxes.wait_for_start()
 
 # Write the code by filling in the ??? ...
 #
-low = 0
-high = boxes.num_boxes() - 1
-found_index = -1    # -1 means "not found yet"
-while high - low + 1 > 0 and found_index == -1:
-     mid = (low + high) // 2
-     value = boxes.open_box(mid)
-     if value == target:
-         found_index = mid
-     elif target < value:
-         high = mid - 1
-     else: # value < target
-         low = mid + 1
-
+# low = ???
+# high = ???
+# found_index = -1    # -1 means "not found yet"
+# while ??? and ???:
+#     ???
+#     if ???:
+#         ???
+#     elif ???:
+#         ???    # target must be to the right of box mid
+#     else:
+#         ???    # target must be to the left of box mid
+#
 
 
 if found_index == -1:

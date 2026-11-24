@@ -144,9 +144,12 @@ presentation.
 ### Week 12 (Nov 23 to Nov 27)
 
 - Read this textbook chapter: **none**
-- Review these lecture notes: [sorting](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting.ipynb)
+- Review these lecture notes:
+  [sorting](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting.ipynb)
 - [Lecture examples](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures):
   - [lecture 25 examples](lectures/lecture25/)
+  - [lecture 26 examples](lectures/lecture26/)
+
 - Do this homework: [sorting homework](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting_homework.ipynb) ([solutions](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting_homework_sol.ipynb))
 - Practice problems: [selection sort](lecture_notes/chapter_algorithms/alg3_sorting/selection_sort_start.py) ([solutions](lecture_notes/chapter_algorithms/alg3_sorting/selection_sort_sol.py))
 

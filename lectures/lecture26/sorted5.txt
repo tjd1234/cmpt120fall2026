@@ -1,0 +1,5 @@
+candy
+coffee
+hat
+marshmallow
+vegetables
