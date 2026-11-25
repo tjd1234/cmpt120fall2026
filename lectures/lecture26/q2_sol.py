@@ -36,12 +36,15 @@ unsorted5.txt is NOT in sorted order: "coffee" is out of order
 
 filename = 'unsorted5.txt'
 word_file = open(filename, 'r')
+in_order = True   # flag variable: False means file is NOT in order
 prev_word = ''
 for line in word_file:
     word = line.strip()
     if word < prev_word:
         print(f'{filename} is NOT in sorted order: "{word}" is out of order')
+        in_order = False
         break # jumps out of the loop
     prev_word = word
-else:
+
+if in_order:
     print(f"{filename} is in alphabetical order")
