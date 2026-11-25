@@ -4,7 +4,7 @@
 Write a program that tests if a file of words (one word per line) is in
 alphabetical order. If the file is not in alphabetical order, have it print out
 the first word that is out of order (and then stop). If the file is in
-alphabetical order, the program should print out a message saying so.
+alphabetical order, print a message saying so.
 
 Test it with these files, which are all in alphabetical order:
 

@@ -24,9 +24,14 @@ print(sorted_names)  # ['Alice', 'Bob', 'Charlie', 'David']
 Important: the selection_sort(L) function should NOT modify the list L.
 
 To sort the list L using selection sort, do the following:
-- make a new empty list called result
-- as long as there are items left in L repeat the following steps:
-  - get and remove the smallest element from L
-  - append that smallest element to the end of result
 
+```
+- make a new empty list called result
+
+- as long as there are items left in L repeat the following steps:
+
+  - get and remove the smallest element from L
+
+  - append that smallest element to the end of result
+```
 """

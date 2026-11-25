@@ -15,7 +15,6 @@ Write the my_min function: it should return the lowest number on a list of
 numbers. Do NOT use Python's built-in min function (calculate it using variables
 and a loop).
 """
-
 def my_min(lst):
     smallest_so_far = lst[0]
     for num in lst:
