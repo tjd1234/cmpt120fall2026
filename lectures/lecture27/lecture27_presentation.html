@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lecture 27 Practice Questions</title>
+<style>
+  :root {
+    --bg: #f4f5f7;
+    --panel: #ffffff;
+    --text: #1a1a1a;
+    --accent: #2563eb;
+    --accent-dark: #1d4ed8;
+    --done: #16a34a;
+    --border: #d8dce3;
+    --text-scale: 1;   /* changed by the - and + keys */
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel);
+  }
+  header h1 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+  .question-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .q-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    background: var(--panel);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .q-btn:hover { border-color: var(--accent); }
+  .q-btn.active { border-color: var(--accent); background: #eaf1ff; }
+  .q-btn.done { border-color: var(--done); }
+  .q-btn .check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: transparent;
+    flex-shrink: 0;
+  }
+  .q-btn.done .check {
+    background: var(--done);
+    border-color: var(--done);
+    color: white;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 30px 60px;
+  }
+  .stage {
+    max-width: 1000px;
+    width: 100%;
+  }
+  .placeholder {
+    text-align: center;
+    font-size: calc(1.6rem * var(--text-scale));
+    color: #888;
+    margin-top: 80px;
+  }
+  .question-block.intro-block { font-weight: 400; }
+  .placeholder.intro-start { margin-top: 30px; }
+  .question-block {
+    font-size: calc(2.1rem * var(--text-scale));
+    font-weight: 700;
+    line-height: 1.5;
+    text-align: left;
+  }
+  .question-block p { margin: 0 0 0.7em; }
+  .question-block ul, .question-block ol { margin: 0.5em 0 0.9em 1.4em; padding-left: 0.6em; }
+  .question-block .md-heading { margin: 0.4em 0 0.4em; line-height: 1.25; }
+  .question-block h1.md-heading { font-size: 1.35em; }
+  .question-block h2.md-heading { font-size: 1.2em; }
+  .question-block h3.md-heading, .question-block h4.md-heading,
+  .question-block h5.md-heading, .question-block h6.md-heading { font-size: 1.05em; }
+  .question-block img, .answer-panel img { max-width: 100%; height: auto; }
+  .question-block a, .answer-panel a { color: var(--accent); }
+  .question-block li { margin-bottom: 0.3em; }
+  .question-block pre {
+    background: #1e1e2e;
+    color: #f5f5f5;
+    padding: 18px 22px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: calc(1.2rem * var(--text-scale));
+    font-weight: 400;
+  }
+  .question-block code {
+    background: #e8eaf0;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    font-weight: 400;
+  }
+  .question-block pre code { background: none; padding: 0; }
+  .controls {
+    display: flex;
+    gap: 14px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+  }
+  button.action {
+    font-size: 1.15rem;
+    padding: 14px 26px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .btn-answer {
+    background: var(--accent);
+    color: white;
+  }
+  .btn-answer:hover { background: var(--accent-dark); }
+  .btn-answer.showing { background: #4b5563; }
+  .btn-done {
+    background: var(--panel);
+    border: 2px solid var(--done);
+    color: var(--done);
+  }
+  .btn-done.active {
+    background: var(--done);
+    color: white;
+  }
+  .answer-panel {
+    display: none;
+    margin-top: 10px;
+    padding: 26px 30px;
+    background: #fffbe6;
+    border: 2px solid #f2d675;
+    border-radius: 12px;
+    font-size: calc(1.5rem * var(--text-scale));
+    line-height: 1.5;
+  }
+  .answer-panel.visible { display: block; }
+  .answer-panel h2 {
+    margin-top: 0;
+    font-size: calc(1.1rem * var(--text-scale));
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #92700f;
+  }
+  .answer-panel pre {
+    background: #1e1e2e;
+    color: #f5f5f5;
+    padding: 16px 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: calc(1.15rem * var(--text-scale));
+  }
+  .answer-panel code {
+    background: #eee0b0;
+    padding: 2px 8px;
+    border-radius: 5px;
+  }
+  .answer-panel pre code { background: none; padding: 0; }
+  .no-answer {
+    font-style: italic;
+    color: #888;
+  }
+  .no-solution-note {
+    align-self: center;
+    font-size: 1.15rem;
+  }
+  .file-tag {
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: -18px;
+    margin-bottom: 20px;
+  }
+  sup, sub { font-size: 0.7em; }
+  .key-hint {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #999;
+    padding: 12px 20px 0;
+  }
+  .key-hint kbd {
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    background: var(--panel);
+    font-family: inherit;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Lecture 27 Practice Questions</h1>
+  <div class="question-nav" id="questionNav"></div>
+</header>
+<div class="key-hint">
+  Keys: <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next question &nbsp;&middot;&nbsp;
+  <kbd>Space</kbd> show / hide answer &nbsp;&middot;&nbsp;
+  <kbd>&minus;</kbd> <kbd>+</kbd> smaller / bigger text
+</div>
+<main>
+  <div class="stage" id="stage">
+    <div class="placeholder">Select a question above (or press &rarr;) to display it.</div>
+  </div>
+</main>
+
+<!--
+  ============================================================================
+  QUESTION DATA -- GENERATED, DO NOT EDIT BY HAND
+  ============================================================================
+  This file was generated by generate_presentation.py from the qN.md files
+  in this folder (q1.md, q2.md, q3.md, ...). Each question's markdown is
+  embedded below in a <script type="text/plain"> block, which the browser
+  never runs or displays -- it's just a plain-text container.
+
+  To change a question: edit its qN.md file, then re-run
+      python3 generate_presentation.py
+  to regenerate this HTML file.
+
+  To add a question: add a new qN.md file (q5.md, q6.md, ...) with a
+  "## Question" section and an optional "## Sample Solution" section,
+  then re-run the script.
+
+  To remove a question: delete its qN.md file and re-run the script.
+
+  Do not use the literal text "</script>" inside a question's markdown --
+  that's the only thing that would break it.
+  ============================================================================
+-->
+
+<script type="text/plain" class="qfile" data-id="q1" data-file="q1_sol.py" data-label="Q1">
+## Question
+
+Write a function called selector_sort_file(fname) that takes the name of a file
+as input, and, assuming it has one word per line, sorts the words into
+alphabetical order using selection sort, and then prints the time it took to do
+the sorting (and how many words were sorted).
+
+To time a piece of a code, do this:
+
+```
+import time
+
+start_time = time.time()
+# ... do something ...
+end_time = time.time()
+
+elapsed_seconds = end_time - start_time
+
+print(f'Time taken: {elapsed_seconds} seconds')
+```
+
+Run your function on the files words1000.txt, words5000.txt, ...
+words50000.txt, and record the results.
+
+Your program can have this structure:
+
+```
+def selection_sort_file(fname):
+    # ... code ...
+
+selection_sort_file('words1000.txt')
+selection_sort_file('words5000.txt')
+selection_sort_file('words10000.txt')
+selection_sort_file('words15000.txt')
+selection_sort_file('words20000.txt')
+selection_sort_file('words25000.txt')
+selection_sort_file('words30000.txt')
+selection_sort_file('words35000.txt')
+selection_sort_file('words40000.txt')
+selection_sort_file('words45000.txt')
+selection_sort_file('words50000.txt')
+```
+
+## Sample Solution
+
+```python
+def selection_sort(lst):
+    unsorted = lst[:]  # makes a copy of lst
+    result = []
+    while len(unsorted) > 0:
+        smallest = min(unsorted)
+        unsorted.remove(smallest)
+        result.append(smallest)
+    return result
+
+def selection_sort_file(fname):
+    #
+    # read the words into a list
+    #
+    word_file = open(fname, 'r')
+    all_words = []
+    for line in word_file:
+        word = line.strip()
+        all_words.append(word)
+    word_file.close()
+
+    #
+    # sort the words and time it
+    #
+    import time
+    start_time = time.time()
+    sorted_words = selection_sort(all_words)
+    end_time = time.time()
+    elapsed_seconds = end_time - start_time
+
+    #
+    # print the result
+    #
+    print(f'Time taken to sort {fname}: {elapsed_seconds} seconds')
+
+selection_sort_file('words1000.txt')
+selection_sort_file('words5000.txt')
+selection_sort_file('words10000.txt')
+selection_sort_file('words15000.txt')
+selection_sort_file('words20000.txt')
+selection_sort_file('words25000.txt')
+selection_sort_file('words30000.txt')
+selection_sort_file('words35000.txt')
+selection_sort_file('words40000.txt')
+selection_sort_file('words45000.txt')
+selection_sort_file('words50000.txt')
+```
+</script>
+
+<script>
+function splitSections(text) {
+  text = (text || '').replace(/\r\n/g, '\n');
+  const qMatch = text.match(/##\s*Question\s*\n([\s\S]*?)(?=\n##\s*Sample Solution|$)/);
+  const sMatch = text.match(/##\s*Sample Solution\s*\n([\s\S]*)/);
+  const question = qMatch ? qMatch[1].trim() : text.trim();
+  const solution = sMatch ? sMatch[1].trim() : '';
+  return { question: question, solution: solution };
+}
+
+function loadQuestionsFromPage() {
+  const blocks = document.querySelectorAll('script.qfile');
+  const loaded = [];
+  blocks.forEach(function(block) {
+    const sections = splitSections(block.textContent);
+    loaded.push({
+      id: block.dataset.id,
+      file: block.dataset.file,
+      label: block.dataset.label,
+      question: sections.question,
+      solution: sections.solution
+    });
+  });
+  return loaded;
+}
+
+const QUESTIONS = loadQuestionsFromPage();
+
+// The lecture's intro.md text, if it has one, shown as the opening screen.
+const introBlock = document.getElementById('introText');
+const INTRO = introBlock ? introBlock.textContent.trim() : '';
+
+const DONE_KEY = 'presentationAI_done_lecture27-presentation';
+function loadDone() {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(DONE_KEY) || '[]'));
+  } catch (e) {
+    return new Set();
+  }
+}
+function saveDone(set) {
+  try {
+    localStorage.setItem(DONE_KEY, JSON.stringify(Array.from(set)));
+  } catch (e) {}
+}
+let doneSet = loadDone();
+let currentId = null;
+let answerShown = false;
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function safeUrl(url) {
+  // links and images may only point at files or web pages, not run scripts
+  return /^\s*javascript:/i.test(url) ? '#' : url.replace(/"/g, '&quot;');
+}
+
+// Inline Markdown (text is already HTML-escaped): `code`, **bold**,
+// *italics*, [links](file.py), ![images](picture.png), and $x^2$ / $x_1$.
+function renderInlineMarkup(text) {
+  // set code spans aside first, so nothing inside them is changed
+  const codeSpans = [];
+  text = text.replace(/`([^`]+)`/g, function(_, code) {
+    codeSpans.push('<code>' + code + '</code>');
+    return '\u0000' + (codeSpans.length - 1) + '\u0000';
+  });
+  text = text.replace(/\$([^$]+)\$/g, function(_, inner) {
+    let out = inner;
+    out = out.replace(/\^\{([^}]+)\}/g, '<sup>$1</sup>');
+    out = out.replace(/\^([A-Za-z0-9])/g, '<sup>$1</sup>');
+    out = out.replace(/_\{([^}]+)\}/g, '<sub>$1</sub>');
+    out = out.replace(/_([A-Za-z0-9])/g, '<sub>$1</sub>');
+    return out;
+  });
+  text = text.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function(_, alt, src) {
+    return '<img src="' + safeUrl(src) + '" alt="' + alt.replace(/"/g, '&quot;') + '">';
+  });
+  text = text.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function(_, label, url) {
+    return '<a href="' + safeUrl(url) + '">' + label + '</a>';
+  });
+  text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  // *italics* only when the stars aren't inside a word, so 2*3*4 is left alone
+  text = text.replace(/(^|[^\w*])\*([^*\s](?:[^*]*?[^*\s])?)\*(?![\w*])/g, '$1<em>$2</em>');
+  text = text.replace(/\u0000(\d+)\u0000/g, function(_, i) { return codeSpans[i]; });
+  return text;
+}
+
+// An <img ...> line in the Markdown, rebuilt with only its src, alt, and
+// width attributes (so no other HTML gets into the page).
+function renderImgTag(attrText) {
+  const attrs = {};
+  attrText.replace(/(\w+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g, function(_, name, v1, v2) {
+    attrs[name.toLowerCase()] = v1 !== undefined ? v1 : v2;
+  });
+  let tag = '<img src="' + safeUrl(attrs.src || '') + '" alt="' + (attrs.alt || '').replace(/"/g, '&quot;') + '"';
+  if (/^\d+(%|px)?$/.test(attrs.width || '')) tag += ' width="' + attrs.width + '"';
+  return '<p>' + tag + '></p>';
+}
+
+function renderMarkdownLite(md) {
+  md = (md || '').replace(/\r\n/g, '\n').trim();
+  if (!md) return '';
+  const fenceRegex = /```[ \t]*([a-zA-Z0-9]*)[ \t]*\n([\s\S]*?)```/g;
+  const codeBlocks = [];
+  const placeholderText = md.replace(fenceRegex, function(_, lang, code) {
+    const idx = codeBlocks.length;
+    codeBlocks.push(escapeHtml(code.replace(/\n$/, '')));
+    // blank lines around the placeholder so a code block always stands on
+    // its own, even if the question has no blank line before or after it
+    return '\n\n@@CODEBLOCK' + idx + '@@\n\n';
+  });
+  // headings and <img> lines are blocks of their own
+  const separated = placeholderText.replace(/^([ \t]*(?:#{1,6}[ \t]+.*|<img\b[^>]*>)[ \t]*)$/gim, '\n\n$1\n\n');
+  const blocks = separated.split(/\n\s*\n/);
+  let html = '';
+  for (const block of blocks) {
+    const trimmed = block.trim();
+    if (!trimmed) continue;
+    const codeMatch = trimmed.match(/^@@CODEBLOCK(\d+)@@$/);
+    if (codeMatch) {
+      html += '<pre><code>' + codeBlocks[parseInt(codeMatch[1], 10)] + '</code></pre>';
+      continue;
+    }
+    const headingMatch = trimmed.match(/^(#{1,6})\s+(.*?)\s*#*\s*$/);
+    if (headingMatch) {
+      const level = headingMatch[1].length;
+      html += '<h' + level + ' class="md-heading">' + renderInlineMarkup(escapeHtml(headingMatch[2])) + '</h' + level + '>';
+      continue;
+    }
+    const imgMatch = trimmed.match(/^<img\b([^>]*)>$/i);
+    if (imgMatch) {
+      html += renderImgTag(imgMatch[1]);
+      continue;
+    }
+    const lines = trimmed.split('\n');
+    const listItem = /^\s*([-*]|\d+[.)])\s+(.*)/;
+    const first = lines[0].match(listItem);
+    if (first) {
+      // Group lines into list items: a line starting with "- ", "* ", or
+      // "1. " begins a new item; any other line (e.g. an indented wrapped
+      // continuation of the previous item's text) is appended to the
+      // current item instead of being mistaken for a paragraph.
+      const items = [];
+      lines.forEach(function(l) {
+        const m = l.match(listItem);
+        if (m) {
+          items.push(m[2]);
+        } else if (items.length) {
+          items[items.length - 1] += ' ' + l.trim();
+        }
+      });
+      const numbered = /^\d/.test(first[1]);
+      const open = numbered ? '<ol start="' + parseInt(first[1], 10) + '">' : '<ul>';
+      html += open + items.map(function(item) {
+        return '<li>' + renderInlineMarkup(escapeHtml(item)) + '</li>';
+      }).join('') + (numbered ? '</ol>' : '</ul>');
+    } else {
+      const joined = trimmed.replace(/\n/g, ' ');
+      html += '<p>' + renderInlineMarkup(escapeHtml(joined)) + '</p>';
+    }
+  }
+  return html;
+}
+
+function buildNav() {
+  const nav = document.getElementById('questionNav');
+  nav.innerHTML = '';
+  if (INTRO) {
+    const introBtn = document.createElement('button');
+    introBtn.className = 'q-btn' + (currentId === null ? ' active' : '');
+    introBtn.type = 'button';
+    introBtn.textContent = 'Intro';
+    introBtn.addEventListener('click', showIntro);
+    nav.appendChild(introBtn);
+  }
+  QUESTIONS.forEach(function(q) {
+    const btn = document.createElement('button');
+    btn.className = 'q-btn' + (doneSet.has(q.id) ? ' done' : '') + (q.id === currentId ? ' active' : '');
+    btn.type = 'button';
+    const check = document.createElement('span');
+    check.className = 'check';
+    check.textContent = '✓';
+    check.title = 'Toggle done';
+    check.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleDone(q.id);
+    });
+    const label = document.createElement('span');
+    label.textContent = q.label;
+    btn.appendChild(check);
+    btn.appendChild(label);
+    btn.addEventListener('click', function() {
+      showQuestion(q.id);
+    });
+    nav.appendChild(btn);
+  });
+}
+
+function toggleDone(id) {
+  if (doneSet.has(id)) {
+    doneSet.delete(id);
+  } else {
+    doneSet.add(id);
+  }
+  saveDone(doneSet);
+  buildNav();
+  if (id === currentId) renderStage();
+}
+
+function showIntro() {
+  currentId = null;
+  answerShown = false;
+  buildNav();
+  renderStage();
+}
+
+function showQuestion(id) {
+  currentId = id;
+  answerShown = false;
+  buildNav();
+  renderStage();
+}
+
+function renderStage() {
+  const stage = document.getElementById('stage');
+  const q = QUESTIONS.find(function(x) { return x.id === currentId; });
+  if (!q) {
+    if (INTRO) {
+      stage.innerHTML = '<div class="question-block intro-block">' + renderMarkdownLite(INTRO) + '</div>'
+        + '<div class="placeholder intro-start">Press &rarr; or pick a question above to start.</div>';
+    } else {
+      stage.innerHTML = '<div class="placeholder">Select a question above (or press &rarr;) to display it.</div>';
+    }
+    return;
+  }
+  const isDone = doneSet.has(q.id);
+  const hasSolution = q.solution && q.solution.trim().length > 0;
+  let html = '';
+  html += '<div class="file-tag">' + q.file + '</div>';
+  html += '<div class="question-block">' + renderMarkdownLite(q.question) + '</div>';
+  html += '<div class="controls">';
+  if (hasSolution) {
+    html += '<button type="button" class="action btn-answer' + (answerShown ? ' showing' : '') + '" id="answerToggle">' + (answerShown ? 'Hide Answer' : 'Show Answer') + '</button>';
+  }
+  html += '<button type="button" class="action btn-done' + (isDone ? ' active' : '') + '" id="doneToggle">' + (isDone ? '✓ Marked Done' : 'Mark as Done') + '</button>';
+  if (!hasSolution) {
+    html += '<span class="no-answer no-solution-note">Solution not posted yet.</span>';
+  }
+  html += '</div>';
+  if (hasSolution) {
+    html += '<div class="answer-panel' + (answerShown ? ' visible' : '') + '" id="answerPanel">';
+    html += '<h2>Sample Solution</h2>';
+    html += renderMarkdownLite(q.solution);
+    html += '</div>';
+  }
+  stage.innerHTML = html;
+
+  if (hasSolution) {
+    document.getElementById('answerToggle').addEventListener('click', function() {
+      answerShown = !answerShown;
+      renderStage();
+    });
+  }
+  document.getElementById('doneToggle').addEventListener('click', function() {
+    toggleDone(q.id);
+  });
+}
+
+// Text size. The - and + keys change --text-scale,
+// which the question and answer font sizes are multiplied by. The size is
+// remembered in this browser, so it stays the same for every lecture.
+const SCALE_KEY = 'presentationAI_text_scale';
+const MIN_SCALE = 0.5;
+const MAX_SCALE = 2.5;
+let textScale = 1;
+try {
+  const saved = parseFloat(localStorage.getItem(SCALE_KEY));
+  if (saved >= MIN_SCALE && saved <= MAX_SCALE) textScale = saved;
+} catch (e) {}
+
+function setTextScale(scale) {
+  textScale = Math.round(Math.min(Math.max(scale, MIN_SCALE), MAX_SCALE) * 10) / 10;
+  document.documentElement.style.setProperty('--text-scale', textScale);
+  try { localStorage.setItem(SCALE_KEY, String(textScale)); } catch (e) {}
+}
+
+setTextScale(textScale);
+
+// Keyboard controls: left/right arrows move between questions, Space shows
+// or hides the answer, and - / + change the text size.
+function moveQuestion(step) {
+  if (QUESTIONS.length === 0) return;
+  const i = QUESTIONS.findIndex(function(x) { return x.id === currentId; });
+  let next;
+  if (INTRO && step < 0 && i <= 0) {
+    if (i === 0) showIntro();   // left from the first question goes back to the intro
+    return;
+  }
+  if (i === -1) {
+    next = step > 0 ? 0 : QUESTIONS.length - 1;  // nothing shown yet
+  } else {
+    next = Math.min(Math.max(i + step, 0), QUESTIONS.length - 1);
+  }
+  if (QUESTIONS[next].id !== currentId) showQuestion(QUESTIONS[next].id);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.altKey || e.ctrlKey || e.metaKey) return;  // leave browser shortcuts alone
+  if (e.key === 'ArrowRight') {
+    moveQuestion(1);
+  } else if (e.key === 'ArrowLeft') {
+    moveQuestion(-1);
+  } else if (e.key === ' ') {
+    const shown = QUESTIONS.find(function(x) { return x.id === currentId; });
+    if (!shown || !shown.solution) return;   // nothing to show
+    answerShown = !answerShown;
+    renderStage();
+  } else if (e.key === '-' || e.key === '_') {
+    setTextScale(textScale - 0.1);
+  } else if (e.key === '+' || e.key === '=') {
+    setTextScale(textScale + 0.1);
+  } else {
+    return;
+  }
+  // stop Space from also scrolling the page or clicking a focused button
+  e.preventDefault();
+  if (document.activeElement) document.activeElement.blur();
+});
+
+if (QUESTIONS.length === 0) {
+  document.getElementById('stage').innerHTML = '<div class="placeholder">No question blocks found in this page.</div>';
+} else {
+  buildNav();
+  renderStage();
+}
+</script>
+</body>
+</html>
