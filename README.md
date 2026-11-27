@@ -149,6 +149,7 @@ presentation.
 - [Lecture examples](https://github.com/tjd1234/cmpt120fall2026/tree/main/lectures):
   - [lecture 25 examples](lectures/lecture25/)
   - [lecture 26 examples](lectures/lecture26/)
+  - [lecture 27 examples](lectures/lecture27/)
 
 - Do this homework: [sorting homework](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting_homework.ipynb) ([solutions](lecture_notes/chapter_algorithms/alg3_sorting/alg3_sorting_homework_sol.ipynb))
 - Practice problems: [selection sort](lecture_notes/chapter_algorithms/alg3_sorting/selection_sort_start.py) ([solutions](lecture_notes/chapter_algorithms/alg3_sorting/selection_sort_sol.py))
